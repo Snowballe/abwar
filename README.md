@@ -1,2 +1,3 @@
-# abwar
-GitHub du jeu Abwar, le jeu d'alcool avec des privates jokes
+## GITHUB ABWAR
+
+Yo Benj, c'est bien ici le github du jeu du cul samer
