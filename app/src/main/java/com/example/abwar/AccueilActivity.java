@@ -43,7 +43,7 @@ public class AccueilActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ArrayList<String>TousMesjoueurs=new ArrayList<>();
-
+//todo choper des editstexts de la scrollview et envoyer dans une array avec le intent
                 for (int i=0;i<LayoutNoms.getChildCount();i++){
                     EditText et = new EditText(AccueilActivity.this);
 
