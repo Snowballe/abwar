@@ -1,20 +1,17 @@
 package com.example.abwar;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.text.Layout;
+import android.text.Editable;
+import android.text.InputFilter;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
-import java.io.Serializable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.ArrayList;
 
 public class AccueilActivity extends AppCompatActivity {
@@ -23,56 +20,59 @@ public class AccueilActivity extends AppCompatActivity {
 
     private LinearLayout LayoutNoms;
 
+    public EditText createNewFormattedEditText(){
+        EditText et = new EditText(AccueilActivity.this);
+        et.setFilters(new InputFilter[] {new InputFilter.LengthFilter(64)});
+        int nbJoueur = LayoutNoms.getChildCount() + 1;
+        et.setHint("Joueur " + nbJoueur);
+        return et;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accueil);
 
-    SharedPreferences mesJoueurs= getSharedPreferences("MesJoueurs",0);
-    SharedPreferences.Editor editor=mesJoueurs.edit();
+        SharedPreferences mesJoueurs = getSharedPreferences("MesJoueurs", 0);
+        SharedPreferences.Editor editor = mesJoueurs.edit();
 
 
+        BtnToGame = findViewById(R.id.BtnToGame);
+        BtnAdd = findViewById(R.id.BtnAdd);
+
+        LayoutNoms = findViewById(R.id.LayoutNoms);
 
 
-
-        BtnToGame= findViewById(R.id.BtnToGame);
-        BtnAdd= findViewById(R.id.BtnAdd);
-
-        LayoutNoms= findViewById(R.id.LayoutNoms);
-
-
-        ArrayList<EditText>listeEditTexts=new ArrayList<>();
+        ArrayList<EditText> listeEditTexts = new ArrayList<>();
 
         //init de base des cases pour rentrer plus facilement des joueurs
-        for (int i=0;i<4;i++){
+        for (int i = 0; i < 4; i++) {
+
             EditText et = new EditText(AccueilActivity.this);
-            et.setHint("Joueur N°"+(i+1));
-
+            et.setHint("Joueur N°" + (i + 1));
+            et.setFilters(new InputFilter[] {new InputFilter.LengthFilter(64)});
             listeEditTexts.add(et);
-        }
+            LayoutNoms.addView(et);
 
+        }
 
 
         BtnToGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                ArrayList<String> mesJoueursPourLactivity = new ArrayList<>();
+                for (int i = 0; i < LayoutNoms.getChildCount(); i++) {
 
-        //todo choper des editstexts de la scrollview et envoyer dans une array avec le intent
-                for (int i=0;i<LayoutNoms.getChildCount();i++){
-                    System.out.println(
-                            listeEditTexts.get(i).getText()
-                    );
-
-
-
-                    //String joueur= (String) resourcesFromText.getText(LayoutNoms.getChildAt(i));
-                    //TousMesjoueurs.add(joueur);
-                    //editor.putInt(joueur,0);
-                    //editor.commit();
+                    Editable monJoueur = listeEditTexts.get(i).getText();
+                    if (monJoueur.toString() != "") {
+                        editor.putInt(monJoueur.toString(), 0);
+                        editor.commit();
+                        mesJoueursPourLactivity.add(monJoueur.toString());
+                    }
                 }
-                Intent GoToGameActivity=new Intent(AccueilActivity.this, GameActivity.class);
-                GoToGameActivity.putExtra("joueurs",listeEditTexts);
+                Intent GoToGameActivity = new Intent(AccueilActivity.this, GameActivity.class);
+                GoToGameActivity.putExtra("ACCES_JOUEURS", mesJoueursPourLactivity);
                 startActivity(GoToGameActivity);
             }
         });
@@ -80,10 +80,7 @@ public class AccueilActivity extends AppCompatActivity {
         BtnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText et = new EditText(AccueilActivity.this);
-
-                int nbJoueur=LayoutNoms.getChildCount()+1;
-                et.setHint("Joueur "+nbJoueur);
+                EditText et=createNewFormattedEditText();
                 listeEditTexts.add(et);
                 LayoutNoms.addView(et);
             }
