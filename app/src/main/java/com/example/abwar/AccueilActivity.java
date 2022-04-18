@@ -45,12 +45,13 @@ public class AccueilActivity extends AppCompatActivity {
 
         ArrayList<EditText> listeEditTexts = new ArrayList<>();
 
-        //init de base des cases pour rentrer plus facilement des joueurs
+        //init de base des cases pour rentrer plus facilement des joueurs, ils sont formatés à 16 caratères max pour éviter un débordement le la question à l'écran
+        //todo Ptet changer le charcater limit sur le filtre, 16 c'est coulliu mais ptet pas assez grand, mais 64 c'est vraiment trop.
         for (int i = 0; i < 4; i++) {
 
             EditText et = new EditText(AccueilActivity.this);
             et.setHint("Joueur N°" + (i + 1));
-            et.setFilters(new InputFilter[] {new InputFilter.LengthFilter(64)});
+            et.setFilters(new InputFilter[] {new InputFilter.LengthFilter(16)});
             listeEditTexts.add(et);
             LayoutNoms.addView(et);
 
@@ -71,9 +72,9 @@ public class AccueilActivity extends AppCompatActivity {
                         mesJoueursPourLactivity.add(monJoueur.toString());
                     }
                 }
-                Intent GoToGameActivity = new Intent(AccueilActivity.this, GameActivity.class);
-                GoToGameActivity.putExtra("ACCES_JOUEURS", mesJoueursPourLactivity);
-                startActivity(GoToGameActivity);
+                Intent GoToDifficultyActivity = new Intent(AccueilActivity.this, DifficulteActivity.class);
+                GoToDifficultyActivity.putExtra("ACCES_JOUEURS", mesJoueursPourLactivity);
+                startActivity(GoToDifficultyActivity);
             }
         });
 

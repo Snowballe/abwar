@@ -6,13 +6,36 @@
     android:layout_height="match_parent"
     tools:context=".DifficulteActivity">
 
+    <Button
+        android:id="@+id/BtnEasy"
+        android:layout_width="250dp"
+        android:layout_height="150dp"
+        android:visibility="invisible"
+        tools:layout_editor_absoluteX="81dp"
+        tools:layout_editor_absoluteY="79dp" />
+
+    <Button
+        android:id="@+id/btnIntermediate"
+        android:layout_width="250dp"
+        android:layout_height="150dp"
+        android:visibility="invisible"
+        tools:layout_editor_absoluteX="81dp"
+        tools:layout_editor_absoluteY="256dp" />
+
+    <Button
+        android:id="@+id/btnHard"
+        android:layout_width="250dp"
+        android:layout_height="150dp"
+        android:visibility="invisible"
+        tools:layout_editor_absoluteX="81dp"
+        tools:layout_editor_absoluteY="424dp" />
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="166dp"
         android:layout_height="100dp"
         android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTitre"
         app:srcCompat="@drawable/diff1png" />
@@ -21,31 +44,27 @@
         android:id="@+id/imageView2"
         android:layout_width="168dp"
         android:layout_height="100dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextViewDiff1"
-        app:srcCompat="@drawable/diff2png" />
+        app:srcCompat="@drawable/diff2png"
+        tools:layout_editor_absoluteX="122dp"
+        tools:layout_editor_absoluteY="254dp" />
 
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="187dp"
         android:layout_height="100dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:srcCompat="@drawable/diff3" />
+        app:srcCompat="@drawable/diff3"
+        tools:layout_editor_absoluteX="112dp"
+        tools:layout_editor_absoluteY="431dp" />
 
     <View
         android:id="@+id/view"
-        android:layout_width="405dp"
+        android:layout_width="0dp"
         android:layout_height="2dp"
         android:background="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintTop_toBottomOf="@+id/btnHard" />
 
     <TextView
         android:id="@+id/textViewTitre"
@@ -53,32 +72,37 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Choisissez votre difficulté"
+        android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/TextViewDiff1"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="On viens de commencer la soirée, tout va bien, on boit les premières bières !\n1 à 3 gorgées."
+        android:text="On vient de commencer la soirée, tout va bien, on boit les premières bières !\n1 à 3 gorgées."
         android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textViewTitre"
+        app:layout_constraintStart_toStartOf="@+id/textViewTitre"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <TextView
         android:id="@+id/textViewDiff2"
-        android:layout_width="wrap_content"
+        android:layout_width="304dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="On commence à etre entamé, on commence l'alcool fort.\n1 à 6 gorgées."
+        android:text="On commence à être entamés, on passe à l'alcool fort.\n1 à 6 gorgées."
         android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        tools:layout_editor_absoluteX="46dp"
+        tools:layout_editor_absoluteY="355dp" />
+
+    <TextView
+        android:id="@+id/textViewDiff3"
+        android:layout_width="304dp"
+        android:layout_height="wrap_content"
+        android:text="Il est 5h du matin. Pourquoi je lance ce jeu déjà ?\n2 à 10 gorgées."
+        android:textAlignment="center"
+        tools:layout_editor_absoluteX="46dp"
+        tools:layout_editor_absoluteY="531dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
