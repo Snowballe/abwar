@@ -15,8 +15,10 @@ import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class AccueilActivity extends AppCompatActivity {
@@ -41,13 +43,21 @@ public class AccueilActivity extends AppCompatActivity {
         setContentView(R.layout.activity_accueil);
 
         dbHandler=new DBHandler(AccueilActivity.this);
+
+        //todo cette merde
+        //Je veux ouvir mon fichier texte pour l'avoir sous le coude et les intégrer dans la db, pour avoir un accès plus rapide et simple
         try {
             InputStream is=AccueilActivity.this.getResources().getAssets().open("questions.txt");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+            String line = reader.readLine();
+            while (line !=null){
+                dbHandler.addNewQuestion(line);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //todo à faire les questions avant la game, le chargement sera surement plus fluide
-        dbHandler.addQuestion("Oui ?");
+
+
 
 
         SharedPreferences mesJoueurs = getSharedPreferences("MesJoueurs", 0);
