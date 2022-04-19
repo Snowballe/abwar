@@ -15,6 +15,8 @@ import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 public class AccueilActivity extends AppCompatActivity {
@@ -22,7 +24,7 @@ public class AccueilActivity extends AppCompatActivity {
     private Button BtnAdd;
 
     private LinearLayout LayoutNoms;
-
+    private DBHandler dbHandler;
 
     public EditText createNewFormattedEditText(){
         EditText et = new EditText(AccueilActivity.this);
@@ -37,6 +39,16 @@ public class AccueilActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accueil);
+
+        dbHandler=new DBHandler(AccueilActivity.this);
+        try {
+            InputStream is=AccueilActivity.this.getResources().getAssets().open("questions.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //todo à faire les questions avant la game, le chargement sera surement plus fluide
+        dbHandler.addQuestion("Oui ?");
+
 
         SharedPreferences mesJoueurs = getSharedPreferences("MesJoueurs", 0);
         SharedPreferences.Editor editor = mesJoueurs.edit();
