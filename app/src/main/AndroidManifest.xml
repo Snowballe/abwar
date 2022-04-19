@@ -9,12 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Abwar">
-<<<<<<< HEAD
-        <activity android:name=".AfterGameActivity"></activity>
-        <activity android:name=".GameActivity" />
-=======
-        <activity android:name=".DifficulteActivity"></activity>
->>>>>>> aled
+        <activity android:name=".TroisActivity"></activity>
+        <activity android:name=".DifficulteActivity" />
         <activity android:name=".AccueilActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,11 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< HEAD
-=======
-        <activity android:name=".GameActivity" />
+        <activity android:name=".GameActivity"
+                    android:screenOrientation="landscape"/>
         <activity android:name=".AfterGameActivity" />
->>>>>>> aled
     </application>
 
 </manifest>
