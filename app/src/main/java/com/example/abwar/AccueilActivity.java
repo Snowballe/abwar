@@ -46,7 +46,7 @@ public class AccueilActivity extends AppCompatActivity {
 
         //todo cette merde
         //Je veux ouvir mon fichier texte pour l'avoir sous le coude et les intégrer dans la db, pour avoir un accès plus rapide et simple
-        try {
+        /*try {
             InputStream is=AccueilActivity.this.getResources().getAssets().open("questions.txt");
             BufferedReader reader = new BufferedReader(new InputStreamReader(is));
             String line = reader.readLine();
@@ -55,7 +55,7 @@ public class AccueilActivity extends AppCompatActivity {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
 
 
 
