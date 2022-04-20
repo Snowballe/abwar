@@ -26,7 +26,6 @@ public class AccueilActivity extends AppCompatActivity {
     private Button BtnAdd;
 
     private LinearLayout LayoutNoms;
-    private DBHandler dbHandler;
 
     public EditText createNewFormattedEditText(){
         EditText et = new EditText(AccueilActivity.this);
@@ -41,24 +40,6 @@ public class AccueilActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accueil);
-
-        dbHandler=new DBHandler(AccueilActivity.this);
-
-        //todo cette merde
-        //Je veux ouvir mon fichier texte pour l'avoir sous le coude et les intégrer dans la db, pour avoir un accès plus rapide et simple
-        /*try {
-            InputStream is=AccueilActivity.this.getResources().getAssets().open("questions.txt");
-            BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-            String line = reader.readLine();
-            while (line !=null){
-                dbHandler.addNewQuestion(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-
-
-
 
         SharedPreferences mesJoueurs = getSharedPreferences("MesJoueurs", 0);
         SharedPreferences.Editor editor = mesJoueurs.edit();
