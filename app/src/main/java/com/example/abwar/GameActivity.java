@@ -1,8 +1,10 @@
 package com.example.abwar;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,11 +16,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.IntStream;
 
 public class GameActivity extends AppCompatActivity {
 private TextView textViewQuestion;
-private String[] questions;
+private String[] RawQuestions;
+private List<String> ConvertedQuestions;
 private Button BtnNext;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,19 +39,22 @@ private Button BtnNext;
         SharedPreferences mesJoueurs = getSharedPreferences("MesJoueurs", 0);
         SharedPreferences.Editor editor = mesJoueurs.edit();
 
-        questions=getResources().getStringArray(R.array.Questions);
-        List<String> questionsAryL= Arrays.asList(questions);
+        RawQuestions=getResources().getStringArray(R.array.Questions);
+        ConvertedQuestions=Arrays.asList(RawQuestions);
 
-        int randomIndex = new Random().nextInt(questions.length);
-        textViewQuestion.setText(questions[randomIndex]);
+        //Init quand c'est la 1ere fois qu'on arrive sur la page
+        int randomIndex = new Random().nextInt(RawQuestions.length);
+        textViewQuestion.setText(RawQuestions[randomIndex]);
+
+
 
         BtnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 textViewQuestion.setText("");
-                int randomIndex = new Random().nextInt(questions.length);
-                textViewQuestion.setText(questions[randomIndex]);
-                //questionsAryL.remove(randomIndex);
+                int randomIndex = new Random().nextInt(ConvertedQuestions.size());
+                textViewQuestion.setText(ConvertedQuestions.get(randomIndex));
+                ConvertedQuestions.remove(randomIndex);
             }
         });
     }
