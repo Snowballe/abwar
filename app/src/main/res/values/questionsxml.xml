@@ -18,10 +18,10 @@
     meilleure. Les majoritaires distribuez %gog gorgées chacun
 </item><item>%plr et %plr peuvent baiser n\'importe quelle personne sur Terre, du passé comme du
     présent, votez la meilleure réponse, le perdant boit %gog
-</item><item>$plr lâche sa meilleure anecdote, votez pour sa véracité, les perdants boivent %gog
-</item><item>$plr n\'a plus le droit de se lever de sa chaise, si ce gros tas se met debout, c\'est
+</item><item>%plr lâche sa meilleure anecdote, votez pour sa véracité, les perdants boivent %gog
+</item><item>%plr n\'a plus le droit de se lever de sa chaise, si ce gros tas se met debout, c\'est
     %gog
-</item><item>$plr fait un lap dance a %plr, si il/elle refuse c\'est %gog gorgées !</item><item>
+</item><item>%plr fait un lap dance a %plr, si il/elle refuse c\'est %gog gorgées !</item><item>
     Pierre-feuille-ciseaux entre %plr et %plr en une manche, celui qui perd boit %gog
 </item><item>Les développeurs du jeu peuvent distribuer %gog chacuns</item><item>Linux c\'est de la
     merde, les connards qui y ont touchés boivent %gog
@@ -61,13 +61,13 @@
 </item><item>Ceux qui ont déjà raté leur 1ère année de PACES, dommage mais tu bois %gog gorgées
 </item><item>Si tu vis toujours chez papa-maman, bois %gog</item><item>Chacun distribue le nombre
     d\'années d\'étude que vous voulez faire/avez fait en gorgées
-</item><item>$plr mange une cuillère à café concoctée par %plr. Si l\'estomac de fer y arrive, il
+</item><item>%plr mange une cuillère à café concoctée par %plr. Si l\'estomac de fer y arrive, il
     distribue %gog, sinon il est boit.
-</item><item>$plr imite quelque chose, et $plr doit trouver dans les 20s qui suivent. %gog gorgées
+</item><item>%plr imite quelque chose, et %plr doit trouver dans les 20s qui suivent. %gog gorgées
     en jeu !
 </item><item>%plr et %plr prennent chacun 5 cartes. Vous devez à tour de rôle deviner la couleur
     d\'une carte. Si c\'est raté, c\'est %gog gorgées !
-</item><item>Le premier qui dit \"ABWAR\" distribue %gog gorgées à la personne à sa gauche
+</item><item>Le premier qui dit \"ABWAR\" distribue %gog gorgées
 </item><item>Le premier qui dit \"ABWAR\" boit %gog gorgées dans le verre de %plr</item><item>Celui
     qui a fini son verre en dernier distribue %gog gorgées
 </item><item>Si tu bois l\'alcool que tu as ramené tu distribues %gog gorgées, sinon tu les bois
@@ -189,4 +189,14 @@
     de refus
 </item><item>%plr et %plr disent chacun leurs plaisirs coupables, on vote le PIRE, le perdant boit
     %gog gorgées
-</item>  </string-array>     </resources>
+</item>
+<item>Si t\'as déjà tenu la zigounette d\'un pote pour qu\'il pisse en liberté, tu distribues %gog gorgées.</item>
+<item>Bois %gog gorgées si tu es chauve ou rasé de près</item>
+<item>Si t\'as déjà ramené du rhum arrangé en soirée tu bois %gog</item>
+        <item>Si t\'as déjà malmené sexuellement un objet non-conventionnel de type jouet (Nerf, Lego, poupée Barbie...), tu bois %gog gorgées</item>
+<item>Si t\'as déjà utilisé un sex toy bois %gog gorgée</item>
+        <item>"Sur ma pizza, il y a..." à tour de rôle mettez des ingrédients, en n\'oubliant pas ceux rajoutés précédemment. Si tu oublies ou tu te répètes, tu bois %gog gorgées.</item>
+
+
+    </string-array>
+</resources>
