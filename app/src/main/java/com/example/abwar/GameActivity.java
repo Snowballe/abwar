@@ -95,6 +95,7 @@ public class GameActivity extends AppCompatActivity {
                 maCouillasse.append(ArraySplittedQuestionJoueurs.get(ArraySplittedQuestionJoueurs.size()-1));
 
                 MaQuestion=maCouillasse.toString();
+                maCouillasse.setLength(0);
 
                 System.out.println("Quesiton après le passage plr :"+MaQuestion);
 // là, la question est clean, le tag %gog toujours là et une seule phrase
@@ -109,6 +110,7 @@ public class GameActivity extends AppCompatActivity {
                     ArraySplittedQuestionGorgees.set(i,s);
                     maCouillasse.append(ArraySplittedQuestionGorgees.get(i));
                 }
+
                 maCouillasse.append(ArraySplittedQuestionGorgees.get(ArraySplittedQuestionGorgees.size()-1));
                 //System.out.println(maCouillasse.toString());//question toute seule sans les joueurs d'ajoutés, les gorgées juste
 
