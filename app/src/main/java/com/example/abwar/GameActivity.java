@@ -43,7 +43,7 @@ public class GameActivity extends AppCompatActivity {
         cptQuestions = 0;
 
         ArrayList<Integer> BannedIndexes = new ArrayList<>();
-        ArrayList<Integer>TempbannedPlr=new ArrayList<Integer>();
+        ArrayList<Integer> TempbannedPlr = new ArrayList<Integer>();
 
         SharedPreferences mesJoueurs = getSharedPreferences("MesJoueurs", 0);
         SharedPreferences.Editor editor = mesJoueurs.edit();
@@ -53,7 +53,7 @@ public class GameActivity extends AppCompatActivity {
 
         //Init quand c'est la 1ere fois qu'on arrive sur la page
         int randomIndex = new Random().nextInt(ConvertedQuestions.size());
-        textViewQuestion.setText(RawQuestions[randomIndex]);
+        textViewQuestion.setText("Init de merde que je vais faire");
 
 
         BtnNext.setOnClickListener(new View.OnClickListener() {
@@ -61,39 +61,62 @@ public class GameActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //region Init
                 textViewQuestion.setText("");
-                String MaQuestion=new String();
+                String MaQuestion = new String();
 
-                int randomIndexJoueur= new Random().nextInt(mesJoueursPourLactivity.size());
-
-                TempbannedPlr.add(randomIndexJoueur);
-
-                int randomNbGorgee=new Random().nextInt(MaxInt-MinInt)+MinInt;
+                int randomIndexJoueur=new Random().nextInt(mesJoueursPourLactivity.size());
+                int randomNbGorgee = new Random().nextInt(MaxInt - MinInt) + MinInt;
                 int randomIndexQuestion = new Random().nextInt(ConvertedQuestions.size());
                 //endregion
 
                 while (BannedIndexes.contains(randomIndexQuestion)) {//On regarde si la question est déjà passée, on veut pas l'avoir 2 fois
                     randomIndexQuestion = new Random().nextInt(ConvertedQuestions.size());
                 }
-                MaQuestion=ConvertedQuestions.get(randomIndexQuestion);
+                MaQuestion = ConvertedQuestions.get(randomIndexQuestion);
 
-                MaQuestion=MaQuestion.replace("%gog",Integer.toString(randomNbGorgee));
 
-                Pattern patternPlr=Pattern.compile("%plr");
-                Matcher matcher = patternPlr.matcher(MaQuestion);
 
-                randomIndexJoueur = new Random().nextInt(mesJoueursPourLactivity.size());
+                StringBuilder maCouillasse=new StringBuilder();
 
-                //Si y'a plusieurs joueurs
 
-                while (matcher.find()){
-                    while (TempbannedPlr.contains(randomIndexQuestion)) {
-                        randomIndexJoueur = new Random().nextInt(mesJoueursPourLactivity.size());
-                    }
-                    MaQuestion=MaQuestion.replace("%plr",mesJoueursPourLactivity.get(randomIndexJoueur));
+                ArrayList<String> ArraySplittedQuestionJoueurs = new ArrayList<String>(Arrays.asList(MaQuestion.split("%plr"))) ;
+
+
+                for (int i = 0; i < ArraySplittedQuestionJoueurs.size()-1; i++) {
+                    String s = ArraySplittedQuestionJoueurs.get(i);
+                    s=s+mesJoueursPourLactivity.get(randomIndexJoueur);
+                    ArraySplittedQuestionJoueurs.set(i,s);
+                    TempbannedPlr.add(randomIndexJoueur);
+                    do {
+                        randomIndexJoueur=new Random().nextInt(mesJoueursPourLactivity.size());
+                    }while(TempbannedPlr.contains(randomIndexJoueur));
+
+                    maCouillasse.append(ArraySplittedQuestionJoueurs.get(i));
                 }
+                maCouillasse.append(ArraySplittedQuestionJoueurs.get(ArraySplittedQuestionJoueurs.size()-1));
 
+                MaQuestion=maCouillasse.toString();
+
+                System.out.println("Quesiton après le passage plr :"+MaQuestion);
+// là, la question est clean, le tag %gog toujours là et une seule phrase
+
+                ArrayList<String> ArraySplittedQuestionGorgees = new ArrayList<String>(Arrays.asList(MaQuestion.split("%gog"))) ;
+
+                for (int i=0;i<ArraySplittedQuestionGorgees.size()-1;i++){
+
+                    String s = ArraySplittedQuestionGorgees.get(i);
+                    s=s.concat(String.valueOf(randomNbGorgee));
+                    System.out.println();
+                    ArraySplittedQuestionGorgees.set(i,s);
+                    maCouillasse.append(ArraySplittedQuestionGorgees.get(i));
+                }
+                maCouillasse.append(ArraySplittedQuestionGorgees.get(ArraySplittedQuestionGorgees.size()-1));
+                //System.out.println(maCouillasse.toString());//question toute seule sans les joueurs d'ajoutés, les gorgées juste
+
+                MaQuestion=maCouillasse.toString();
+
+
+                //Display de la question
                 textViewQuestion.setText(MaQuestion);
-
                 //region reset
                 BannedIndexes.add(randomIndexQuestion);
                 TempbannedPlr.clear();
@@ -102,7 +125,7 @@ public class GameActivity extends AppCompatActivity {
                 cptQuestions++;
                 if (cptQuestions == 50) {//En gros la fin du jeu, on fait 50 questions
                     BannedIndexes.clear();
-                    Intent GotoAfterGameActivity=new Intent(GameActivity.this, AfterGameActivity.class);
+                    Intent GotoAfterGameActivity = new Intent(GameActivity.this, AfterGameActivity.class);
                     startActivity(GotoAfterGameActivity);
                 }
             }

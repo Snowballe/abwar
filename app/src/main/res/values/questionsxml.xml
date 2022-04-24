@@ -12,7 +12,7 @@
     verre
 </item><item>A tour de rôle, chacun énonce le nom d\'une bière, celui qui n\'a plus d\'idée boit
     %gog
-</item><item>Trouve un objet insolite pour décaspuler ta bière, si tu arrive pas avec cet objet tu
+</item><item>%plr, trouve un objet insolite pour décaspuler ta bière, si tu arrive pas avec cet objet tu
     bois %gog
 </item><item>%plr,%plr et %plr, désignez chacun une bière, ensuite votez tous sur laquelle est la
     meilleure. Les majoritaires distribuez %gog gorgées chacun
@@ -179,7 +179,7 @@
 </item><item>Boit %gog gorgées si t\'as déjà pissé sur un pote</item><item>%plr tu reçois une carte
     multi-passe qui te permet de refuser une question dans la partie
 </item><item>Les musiques de Christophe Maé, celui qui ne trouve pas ou se répète boit %gog
-    gorgées
+    gorgées, %plr commence.
 </item><item>%plr est le sheriff, il a un pistolet ! Il a 5 gorgées qu\'il peut distribuer à qui il
     veut, quand il veut
 </item><item>%plr devient le barman attitré de %plr, il choisit la composition de tous ses verres
