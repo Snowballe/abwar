@@ -76,7 +76,7 @@ public class AccueilActivity extends AppCompatActivity {
                 for (int i = 0; i < LayoutNoms.getChildCount(); i++) {
 
                     Editable monJoueur = listeEditTexts.get(i).getText();
-                    if (monJoueur.toString() != "") {
+                    if (!monJoueur.toString().equals("")) {
                         editor.putInt(monJoueur.toString(), 0);
                         editor.commit();
                         mesJoueursPourLactivity.add(monJoueur.toString());

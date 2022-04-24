@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -27,12 +28,14 @@ public class GameActivity extends AppCompatActivity {
     private List<String> ConvertedQuestions;
     private Button BtnNext;
     private int cptQuestions;
+    private LinearLayout ScoreboardJoueurs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        ScoreboardJoueurs=findViewById(R.id.emplacementJoueurs);
         textViewQuestion = findViewById(R.id.textViewQuestion);
         BtnNext = findViewById(R.id.BtnNext);
 
@@ -54,6 +57,46 @@ public class GameActivity extends AppCompatActivity {
         //Init quand c'est la 1ere fois qu'on arrive sur la page
         textViewQuestion.setText("Init de merde que je vais faire");
 
+        for (int i = 0; i < mesJoueursPourLactivity.size(); i++) {
+            LinearLayout layoutJoueur = new LinearLayout(GameActivity.this);
+            layoutJoueur.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            layoutJoueur.setOrientation(LinearLayout.VERTICAL);
+
+            final int[] score = {0};
+
+            ScoreboardJoueurs.addView(layoutJoueur);
+
+            TextView tv=new TextView(GameActivity.this);
+            tv.setText(mesJoueursPourLactivity.get(i)+": "+ score[0]);
+
+            Button BtnPlus = new Button(GameActivity.this);
+            Button BtnMoins=new Button(GameActivity.this);
+
+            BtnPlus.setText("+");
+            BtnMoins.setText("-");
+
+            layoutJoueur.addView(tv);
+            layoutJoueur.addView(BtnPlus);
+            layoutJoueur.addView(BtnMoins);
+
+            int finalI = i;
+            BtnPlus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    score[0] = score[0] +1;
+                    tv.setText(mesJoueursPourLactivity.get(finalI)+": "+ score[0]);
+                    layoutJoueur.addView(tv);
+                }
+            });
+
+            BtnMoins.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    score[0]=score[0]-1;
+                    tv.setText(mesJoueursPourLactivity.get(finalI)+": "+score[1]);
+                }
+            });
+        }
 
         BtnNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,6 +109,8 @@ public class GameActivity extends AppCompatActivity {
                 int randomNbGorgee = new Random().nextInt(MaxInt - MinInt) + MinInt;
                 int randomIndexQuestion = new Random().nextInt(ConvertedQuestions.size());
                 //endregion
+
+
 
                 //region Evitement des répétitions de questions
                 while (BannedIndexes.contains(randomIndexQuestion)) {//On regarde si la question est déjà passée, on veut pas l'avoir 2 fois
@@ -121,7 +166,7 @@ public class GameActivity extends AppCompatActivity {
                 maCouillasse.append(ArraySplittedQuestionGorgees.get(ArraySplittedQuestionGorgees.size() - 1));
 
                 MaQuestion = maCouillasse.toString();
-//endregion
+                //endregion
 
                 //Display de la question
                 textViewQuestion.setText(MaQuestion);
