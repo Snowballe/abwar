@@ -29,7 +29,7 @@ public class AccueilActivity extends AppCompatActivity {
 
     public EditText createNewFormattedEditText(){
         EditText et = new EditText(AccueilActivity.this);
-        et.setFilters(new InputFilter[] {new InputFilter.LengthFilter(64)});
+        et.setFilters(new InputFilter[] {new InputFilter.LengthFilter(16)});
         int nbJoueur = LayoutNoms.getChildCount() + 1;
         et.setHint("Joueur " + nbJoueur);
         return et;

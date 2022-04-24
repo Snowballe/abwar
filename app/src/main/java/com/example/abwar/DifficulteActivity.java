@@ -23,7 +23,8 @@ public class DifficulteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_difficulte);
 
-        ArrayList<String> mesJoueursPourLactivity=getIntent().getStringArrayListExtra("ACCES_JOUEURS");//Obligé de se le refiler pour pouvoir garder les suites de pseudos
+        ArrayList<String> mesJoueursPourLactivity=getIntent().getStringArrayListExtra("ACCES_JOUEURS");
+        //Obligé de se le refiler pour pouvoir garder les suites de pseudos
 
         BtnEasy=findViewById(R.id.BtnEasy);
         btnIntermediate=findViewById(R.id.btnIntermediate);
