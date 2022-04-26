@@ -3,11 +3,13 @@ package com.example.abwar;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -30,16 +32,18 @@ public class GameActivity extends AppCompatActivity {
     private int cptQuestions;
     private LinearLayout ScoreboardJoueurs;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        ScoreboardJoueurs=findViewById(R.id.emplacementJoueurs);
+        ArrayList<String> mesJoueursPourLactivity = getIntent().getStringArrayListExtra("ACCES_JOUEURS");
+
+        ScoreboardJoueurs = findViewById(R.id.emplacementJoueurs);
         textViewQuestion = findViewById(R.id.textViewQuestion);
         BtnNext = findViewById(R.id.BtnNext);
 
-        ArrayList<String> mesJoueursPourLactivity = getIntent().getStringArrayListExtra("ACCES_JOUEURS");
         int MaxInt = getIntent().getIntExtra("MaxRandInt", 0);
         int MinInt = getIntent().getIntExtra("MinRandInt", 0);
 
@@ -55,45 +59,91 @@ public class GameActivity extends AppCompatActivity {
         ConvertedQuestions = Arrays.asList(RawQuestions);
 
         //Init quand c'est la 1ere fois qu'on arrive sur la page
-        textViewQuestion.setText("Init de merde que je vais faire");
+        textViewQuestion.setText("Est-ce que tout le monde est prêt ?");
 
         for (int i = 0; i < mesJoueursPourLactivity.size(); i++) {
             LinearLayout layoutJoueur = new LinearLayout(GameActivity.this);
             layoutJoueur.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             layoutJoueur.setOrientation(LinearLayout.VERTICAL);
 
-            final int[] score = {0};
+            final int[] scoreBoisson = {0};
+            if (layoutJoueur.getParent() != null) {
+                ((ViewGroup) layoutJoueur.getParent()).removeView(layoutJoueur);
 
+            }
             ScoreboardJoueurs.addView(layoutJoueur);
+            StringBuilder sb = new StringBuilder();
+            sb.append(mesJoueursPourLactivity.get(i));
+            sb.append(" : 0");
 
-            TextView tv=new TextView(GameActivity.this);
-            tv.setText(mesJoueursPourLactivity.get(i)+": "+ score[0]);
+            int index = i;
+
+            TextView NomJoueur = new TextView(GameActivity.this);
+            NomJoueur.setText(sb.toString());
 
             Button BtnPlus = new Button(GameActivity.this);
-            Button BtnMoins=new Button(GameActivity.this);
-
+            BtnPlus.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             BtnPlus.setText("+");
-            BtnMoins.setText("-");
+            BtnPlus.setId(new Random().nextInt());
 
-            layoutJoueur.addView(tv);
+            Button BtnMoins = new Button(GameActivity.this);
+
+
+            BtnMoins.setText("-");
+            if (NomJoueur.getParent() != null || BtnPlus.getParent() != null || BtnMoins.getParent() != null) {
+                ((ViewGroup) NomJoueur.getParent()).removeView(NomJoueur);
+                ((ViewGroup) BtnPlus.getParent()).removeView(BtnPlus);
+                ((ViewGroup) BtnMoins.getParent()).removeView(BtnMoins);
+            }
+
+            layoutJoueur.addView(NomJoueur);
             layoutJoueur.addView(BtnPlus);
             layoutJoueur.addView(BtnMoins);
 
-            int finalI = i;
             BtnPlus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    score[0] = score[0] +1;
-                    tv.setText(mesJoueursPourLactivity.get(finalI)+": "+ score[0]);
-                    layoutJoueur.addView(tv);
+                    sb.deleteCharAt(sb.length() - 1);
+                    sb.deleteCharAt(sb.length() - 1);
+                    sb.deleteCharAt(sb.length() - 1);
+
+                    scoreBoisson[0]++;
+                    sb.append(Arrays.toString(scoreBoisson));
+                    String MonNouveauScore = sb.toString();
+                    MonNouveauScore = MonNouveauScore.replace("[", "");
+                    MonNouveauScore = MonNouveauScore.replace("]", "");
+
+                    NomJoueur.setText(MonNouveauScore);
+
+                    if (NomJoueur.getParent() != null) {
+                        ((ViewGroup) NomJoueur.getParent()).removeView(NomJoueur);
+                    }
+
+                    layoutJoueur.addView(NomJoueur);
+                    editor.putInt(mesJoueursPourLactivity.get(index), scoreBoisson[0]);
+                    editor.commit();
                 }
             });
 
             BtnMoins.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    score[0]=score[0]-1;
-                    tv.setText(mesJoueursPourLactivity.get(finalI)+": "+score[1]);
+                    sb.deleteCharAt(sb.length() - 1);
+                    sb.deleteCharAt(sb.length() - 1);
+                    sb.deleteCharAt(sb.length() - 1);
+
+                    scoreBoisson[0]--;
+                    sb.append(Arrays.toString(scoreBoisson));
+                    String MonNouveauScore = sb.toString();
+                    MonNouveauScore = MonNouveauScore.replace("[", "");
+                    MonNouveauScore = MonNouveauScore.replace("]", "");
+                    NomJoueur.setText(MonNouveauScore);
+                    if (NomJoueur.getParent() != null) {
+                        ((ViewGroup) NomJoueur.getParent()).removeView(NomJoueur);
+                    }
+                    layoutJoueur.addView(NomJoueur);
+                    editor.putInt(mesJoueursPourLactivity.get(index), scoreBoisson[0]);
+                    editor.commit();
                 }
             });
         }
@@ -109,7 +159,6 @@ public class GameActivity extends AppCompatActivity {
                 int randomNbGorgee = new Random().nextInt(MaxInt - MinInt) + MinInt;
                 int randomIndexQuestion = new Random().nextInt(ConvertedQuestions.size());
                 //endregion
-
 
 
                 //region Evitement des répétitions de questions
@@ -180,6 +229,7 @@ public class GameActivity extends AppCompatActivity {
                 if (cptQuestions == 50) {//todo En gros la fin du jeu, on fait 50 questions, ((((à débattre avec les autres du coup ))))
                     BannedIndexes.clear();
                     Intent GotoAfterGameActivity = new Intent(GameActivity.this, AfterGameActivity.class);
+                    GotoAfterGameActivity.putExtra("ACCES_JOUEURS", mesJoueursPourLactivity);
                     startActivity(GotoAfterGameActivity);
                 }
             }
