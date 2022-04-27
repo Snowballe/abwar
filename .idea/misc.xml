@@ -3,11 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/maell/AndroidStudioProjects/Abwar/app/src/main/res/layout/activity_accueil.xml" value="0.24583333333333332" />
+        <entry key="..\:/Users/maell/AndroidStudioProjects/Abwar/app/src/main/res/layout/activity_accueil.xml" value="0.30052083333333335" />
         <entry key="..\:/Users/maell/AndroidStudioProjects/Abwar/app/src/main/res/layout/activity_after_game.xml" value="0.27445652173913043" />
         <entry key="..\:/Users/maell/AndroidStudioProjects/Abwar/app/src/main/res/layout/activity_difficulte.xml" value="0.33" />
         <entry key="..\:/Users/maell/AndroidStudioProjects/Abwar/app/src/main/res/layout/activity_game.xml" value="0.25" />
         <entry key="..\:/Users/maell/AndroidStudioProjects/Abwar/app/src/main/res/layout/activity_trois.xml" value="0.2653985507246377" />
+        <entry key="..\:/Users/maell/AndroidStudioProjects/Abwar/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.272" />
         <entry key="..\:/Users/maell/AndroidStudioProjects/Abwar/app/src/main/res/xml/questionsxml.xml" value="0.25677083333333334" />
       </map>
     </option>

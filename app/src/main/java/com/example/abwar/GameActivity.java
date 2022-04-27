@@ -1,11 +1,13 @@
 package com.example.abwar;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -31,15 +33,24 @@ public class GameActivity extends AppCompatActivity {
     private Button BtnNext;
     private int cptQuestions;
     private LinearLayout ScoreboardJoueurs;
-
+    private View viewGameBackground;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        ArrayList<String> BackgroundColors= new ArrayList<>();
+
+        BackgroundColors.add("#E9CE2C");
+        BackgroundColors.add("#E88986");
+        BackgroundColors.add("#00CC83");
+        BackgroundColors.add("#55868C");
+        BackgroundColors.add("#022B3A");
+
         ArrayList<String> mesJoueursPourLactivity = getIntent().getStringArrayListExtra("ACCES_JOUEURS");
 
+        viewGameBackground=findViewById(R.id.viewGameBackground);
         ScoreboardJoueurs = findViewById(R.id.emplacementJoueurs);
         textViewQuestion = findViewById(R.id.textViewQuestion);
         BtnNext = findViewById(R.id.BtnNext);
@@ -151,6 +162,8 @@ public class GameActivity extends AppCompatActivity {
         BtnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //region Backend
+
                 //region Init
                 textViewQuestion.setText("");
                 String MaQuestion = new String();
@@ -232,6 +245,19 @@ public class GameActivity extends AppCompatActivity {
                     GotoAfterGameActivity.putExtra("ACCES_JOUEURS", mesJoueursPourLactivity);
                     startActivity(GotoAfterGameActivity);
                 }
+                //endregion
+
+                //region Frontend
+                int randomBackgroundColor= new Random().nextInt(BackgroundColors.size());
+                if(BackgroundColors.get(randomBackgroundColor)=="#E9CE2C"){
+                    textViewQuestion.setTextColor(Color.parseColor("#000000"));
+                }else{
+                    textViewQuestion.setTextColor(Color.parseColor("#FFFFFF"));
+                }
+                viewGameBackground.setBackgroundColor(Color.parseColor(BackgroundColors.get(randomBackgroundColor)));
+
+                BtnNext.setTextColor(Color.parseColor(BackgroundColors.get(randomBackgroundColor)));
+                //endregion
             }
         });
     }
