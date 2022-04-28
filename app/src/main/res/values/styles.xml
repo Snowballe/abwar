@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources><style name="Theme.Abwar." parent="Theme.AppCompat.Light.NoActionBar">
+    <item name="colorPrimary">@color/black</item>
+    <item name="colorPrimaryDark">@color/black</item>
+    <item name="colorAccent">@color/black</item>
+</style>
+    <style name="AppTheme.ActionBar.Transparent" parent="Theme.Abwar">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="windowActionBarOverlay">true</item>
+        <item name="colorPrimary">@android:color/transparent</item>
+    </style></resources>

@@ -1,12 +1,14 @@
 package com.example.abwar;
 
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputFilter;
 
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,16 +32,22 @@ public class AccueilActivity extends AppCompatActivity {
     public EditText createNewFormattedEditText(){
         EditText et = new EditText(AccueilActivity.this);
         et.setFilters(new InputFilter[] {new InputFilter.LengthFilter(16)});
+        et.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_WORDS);
+        et.setSingleLine(true);
+
         int nbJoueur = LayoutNoms.getChildCount() + 1;
-        et.setHint("Joueur " + nbJoueur);
+        et.setHint("Joueur N°" + nbJoueur);
         return et;
     }
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accueil);
+
+
 
         SharedPreferences mesJoueurs = getSharedPreferences("MesJoueurs", 0);
         SharedPreferences.Editor editor = mesJoueurs.edit();
@@ -60,6 +68,8 @@ public class AccueilActivity extends AppCompatActivity {
             EditText et = new EditText(AccueilActivity.this);
             et.setHint("Joueur N°" + (i + 1));
             et.setFilters(new InputFilter[] {new InputFilter.LengthFilter(16)});
+            et.setSingleLine(true);
+            et.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_WORDS);
             listeEditTexts.add(et);
             LayoutNoms.addView(et);
 

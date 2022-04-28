@@ -5,14 +5,17 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -34,11 +37,14 @@ public class GameActivity extends AppCompatActivity {
     private int cptQuestions;
     private LinearLayout ScoreboardJoueurs;
     private View viewGameBackground;
+    private ImageView imageViewlogo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+
 
         ArrayList<String> BackgroundColors= new ArrayList<>();
 
@@ -50,6 +56,7 @@ public class GameActivity extends AppCompatActivity {
 
         ArrayList<String> mesJoueursPourLactivity = getIntent().getStringArrayListExtra("ACCES_JOUEURS");
 
+        imageViewlogo=findViewById(R.id.imageViewlogo);
         viewGameBackground=findViewById(R.id.viewGameBackground);
         ScoreboardJoueurs = findViewById(R.id.emplacementJoueurs);
         textViewQuestion = findViewById(R.id.textViewQuestion);
@@ -83,6 +90,18 @@ public class GameActivity extends AppCompatActivity {
 
             }
             ScoreboardJoueurs.addView(layoutJoueur);
+
+            LinearLayout layoutBoutons = new LinearLayout(GameActivity.this);
+            layoutJoueur.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            layoutJoueur.setOrientation(LinearLayout.HORIZONTAL);
+
+
+            if (layoutBoutons.getParent() != null) {
+                ((ViewGroup) layoutBoutons.getParent()).removeView(layoutJoueur);
+            }
+
+
+
             StringBuilder sb = new StringBuilder();
             sb.append(mesJoueursPourLactivity.get(i));
             sb.append(" : 0");
@@ -99,8 +118,8 @@ public class GameActivity extends AppCompatActivity {
 
             Button BtnMoins = new Button(GameActivity.this);
 
-
             BtnMoins.setText("-");
+
             if (NomJoueur.getParent() != null || BtnPlus.getParent() != null || BtnMoins.getParent() != null) {
                 ((ViewGroup) NomJoueur.getParent()).removeView(NomJoueur);
                 ((ViewGroup) BtnPlus.getParent()).removeView(BtnPlus);
@@ -108,8 +127,10 @@ public class GameActivity extends AppCompatActivity {
             }
 
             layoutJoueur.addView(NomJoueur);
-            layoutJoueur.addView(BtnPlus);
-            layoutJoueur.addView(BtnMoins);
+            ScoreboardJoueurs.addView(layoutBoutons);
+
+            layoutBoutons.addView(BtnPlus);
+            layoutBoutons.addView(BtnMoins);
 
             BtnPlus.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -119,6 +140,7 @@ public class GameActivity extends AppCompatActivity {
                     sb.deleteCharAt(sb.length() - 1);
 
                     scoreBoisson[0]++;
+
                     sb.append(Arrays.toString(scoreBoisson));
                     String MonNouveauScore = sb.toString();
                     MonNouveauScore = MonNouveauScore.replace("[", "");
@@ -144,6 +166,7 @@ public class GameActivity extends AppCompatActivity {
                     sb.deleteCharAt(sb.length() - 1);
 
                     scoreBoisson[0]--;
+
                     sb.append(Arrays.toString(scoreBoisson));
                     String MonNouveauScore = sb.toString();
                     MonNouveauScore = MonNouveauScore.replace("[", "");
@@ -251,8 +274,10 @@ public class GameActivity extends AppCompatActivity {
                 int randomBackgroundColor= new Random().nextInt(BackgroundColors.size());
                 if(BackgroundColors.get(randomBackgroundColor)=="#E9CE2C"){
                     textViewQuestion.setTextColor(Color.parseColor("#000000"));
+                    imageViewlogo.setImageResource(R.drawable.abwarnoirtransparet);
                 }else{
                     textViewQuestion.setTextColor(Color.parseColor("#FFFFFF"));
+                    imageViewlogo.setImageResource(R.drawable.abwarblanctransparet);
                 }
                 viewGameBackground.setBackgroundColor(Color.parseColor(BackgroundColors.get(randomBackgroundColor)));
 
