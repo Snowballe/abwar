@@ -45,8 +45,7 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
 
-
-        ArrayList<String> BackgroundColors= new ArrayList<>();
+        ArrayList<String> BackgroundColors = new ArrayList<>();
 
         BackgroundColors.add("#E9CE2C");
         BackgroundColors.add("#E88986");
@@ -56,8 +55,8 @@ public class GameActivity extends AppCompatActivity {
 
         ArrayList<String> mesJoueursPourLactivity = getIntent().getStringArrayListExtra("ACCES_JOUEURS");
 
-        imageViewlogo=findViewById(R.id.imageViewlogo);
-        viewGameBackground=findViewById(R.id.viewGameBackground);
+        imageViewlogo = findViewById(R.id.imageViewlogo);
+        viewGameBackground = findViewById(R.id.viewGameBackground);
         ScoreboardJoueurs = findViewById(R.id.emplacementJoueurs);
         textViewQuestion = findViewById(R.id.textViewQuestion);
         BtnNext = findViewById(R.id.BtnNext);
@@ -77,6 +76,7 @@ public class GameActivity extends AppCompatActivity {
         ConvertedQuestions = Arrays.asList(RawQuestions);
 
         //Init quand c'est la 1ere fois qu'on arrive sur la page
+        viewGameBackground.setBackgroundColor(Color.parseColor("#000000"));
         textViewQuestion.setText("Est-ce que tout le monde est prêt ?");
 
         for (int i = 0; i < mesJoueursPourLactivity.size(); i++) {
@@ -101,7 +101,6 @@ public class GameActivity extends AppCompatActivity {
             }
 
 
-
             StringBuilder sb = new StringBuilder();
             sb.append(mesJoueursPourLactivity.get(i));
             sb.append(" : 0");
@@ -112,12 +111,13 @@ public class GameActivity extends AppCompatActivity {
             NomJoueur.setText(sb.toString());
 
             Button BtnPlus = new Button(GameActivity.this);
-            BtnPlus.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            BtnPlus.setLayoutParams(new LinearLayout.LayoutParams(120, ViewGroup.LayoutParams.WRAP_CONTENT));
+
             BtnPlus.setText("+");
             BtnPlus.setId(new Random().nextInt());
 
             Button BtnMoins = new Button(GameActivity.this);
-
+            BtnMoins.setLayoutParams(new LinearLayout.LayoutParams(120, ViewGroup.LayoutParams.WRAP_CONTENT));
             BtnMoins.setText("-");
 
             if (NomJoueur.getParent() != null || BtnPlus.getParent() != null || BtnMoins.getParent() != null) {
@@ -161,23 +161,27 @@ public class GameActivity extends AppCompatActivity {
             BtnMoins.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    sb.deleteCharAt(sb.length() - 1);
-                    sb.deleteCharAt(sb.length() - 1);
-                    sb.deleteCharAt(sb.length() - 1);
+                    if (scoreBoisson[0] != 0) {
+                        sb.deleteCharAt(sb.length() - 1);
+                        sb.deleteCharAt(sb.length() - 1);
+                        sb.deleteCharAt(sb.length() - 1);
 
-                    scoreBoisson[0]--;
+                        scoreBoisson[0]--;
 
-                    sb.append(Arrays.toString(scoreBoisson));
-                    String MonNouveauScore = sb.toString();
-                    MonNouveauScore = MonNouveauScore.replace("[", "");
-                    MonNouveauScore = MonNouveauScore.replace("]", "");
-                    NomJoueur.setText(MonNouveauScore);
-                    if (NomJoueur.getParent() != null) {
-                        ((ViewGroup) NomJoueur.getParent()).removeView(NomJoueur);
+                        sb.append(Arrays.toString(scoreBoisson));
+                        String MonNouveauScore = sb.toString();
+                        MonNouveauScore = MonNouveauScore.replace("[", "");
+                        MonNouveauScore = MonNouveauScore.replace("]", "");
+                        NomJoueur.setText(MonNouveauScore);
+                        if (NomJoueur.getParent() != null) {
+                            ((ViewGroup) NomJoueur.getParent()).removeView(NomJoueur);
+                        }
+                        layoutJoueur.addView(NomJoueur);
+                        editor.putInt(mesJoueursPourLactivity.get(index), scoreBoisson[0]);
+                        editor.commit();
+
                     }
-                    layoutJoueur.addView(NomJoueur);
-                    editor.putInt(mesJoueursPourLactivity.get(index), scoreBoisson[0]);
-                    editor.commit();
+
                 }
             });
         }
@@ -210,6 +214,12 @@ public class GameActivity extends AppCompatActivity {
                 //region Formattage de la question
 
                 //On formatte le string et on le split au niveau du tag, comme ça on aura au lieu de "%plr fait ...." on aura ["","fait ...."]
+                ArrayList<String> ArraySplittedavantverifQuestionJoueurs = new ArrayList<String>(Arrays.asList(MaQuestion.split("%plr")));
+
+                while (ArraySplittedavantverifQuestionJoueurs.size() > mesJoueursPourLactivity.size()) {
+                    MaQuestion = ConvertedQuestions.get(randomIndexQuestion);
+                }
+
                 ArrayList<String> ArraySplittedQuestionJoueurs = new ArrayList<String>(Arrays.asList(MaQuestion.split("%plr")));
 
                 for (int i = 0; i < ArraySplittedQuestionJoueurs.size() - 1; i++) {
@@ -262,22 +272,25 @@ public class GameActivity extends AppCompatActivity {
                 //endregion
 
                 cptQuestions++;
+
                 if (cptQuestions == 50) {//todo En gros la fin du jeu, on fait 50 questions, ((((à débattre avec les autres du coup ))))
                     BannedIndexes.clear();
                     Intent GotoAfterGameActivity = new Intent(GameActivity.this, AfterGameActivity.class);
                     GotoAfterGameActivity.putExtra("ACCES_JOUEURS", mesJoueursPourLactivity);
                     startActivity(GotoAfterGameActivity);
                 }
+
                 //endregion
 
                 //region Frontend
-                int randomBackgroundColor= new Random().nextInt(BackgroundColors.size());
-                if(BackgroundColors.get(randomBackgroundColor)=="#E9CE2C"){
+                int randomBackgroundColor = new Random().nextInt(BackgroundColors.size());
+                if (BackgroundColors.get(randomBackgroundColor) == "#E9CE2C") {
                     textViewQuestion.setTextColor(Color.parseColor("#000000"));
                     imageViewlogo.setImageResource(R.drawable.abwarnoirtransparet);
-                }else{
+                } else {
                     textViewQuestion.setTextColor(Color.parseColor("#FFFFFF"));
                     imageViewlogo.setImageResource(R.drawable.abwarblanctransparet);
+
                 }
                 viewGameBackground.setBackgroundColor(Color.parseColor(BackgroundColors.get(randomBackgroundColor)));
 
@@ -286,4 +299,7 @@ public class GameActivity extends AppCompatActivity {
             }
         });
     }
-}
+    }
+
+
+

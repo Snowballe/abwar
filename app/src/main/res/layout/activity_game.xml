@@ -36,15 +36,17 @@
         android:id="@+id/textViewQuestion"
         android:layout_width="0dp"
         android:layout_height="264dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
         android:textColor="#FFFFFF"
         android:textSize="34sp"
         app:layout_constraintBottom_toTopOf="@+id/BtnNext"
         app:layout_constraintEnd_toStartOf="@+id/ScoreboardJoueurs"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewlogo" />
+        app:layout_constraintTop_toBottomOf="@+id/imageViewlogo"
+        app:layout_constraintVertical_bias="0.28" />
 
     <ScrollView
         android:id="@+id/ScoreboardJoueurs"

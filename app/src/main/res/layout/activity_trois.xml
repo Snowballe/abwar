@@ -16,8 +16,8 @@
 
     <TextView
         android:id="@+id/textView5"
-        android:layout_width="358dp"
-        android:layout_height="259dp"
+        android:layout_width="353dp"
+        android:layout_height="429dp"
         android:text="Le mini-jeu de l'homme de Trois est encore en développement, revenez à la prochaine mise à jour !"
         android:textColor="#FFFFFF"
         android:textSize="34sp"
