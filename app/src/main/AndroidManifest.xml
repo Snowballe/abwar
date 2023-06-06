@@ -4,7 +4,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/lgooabwarnew"
+        android:icon="@drawable/a_de_abwar"
         android:label="@string/app_name"
         android:roundIcon="@drawable/lgooabwarnew"
         android:supportsRtl="true"

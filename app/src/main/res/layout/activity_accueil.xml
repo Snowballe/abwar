@@ -45,12 +45,12 @@
 
     <ImageView
         android:id="@+id/imageView7"
-        android:layout_width="408dp"
-        android:layout_height="267dp"
+        android:layout_width="381dp"
+        android:layout_height="230dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/abwarblanc" />
+        app:srcCompat="@drawable/abwarfiverr" />
 
     <ScrollView
         android:id="@+id/scrollView2"
