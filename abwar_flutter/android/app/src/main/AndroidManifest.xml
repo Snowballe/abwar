@@ -1,8 +1,22 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    
+    <!-- Configuration de l'application -->
     <application
-        android:label="abwar_flutter"
+        android:label="ABWAR"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:theme="@style/Theme.AbwarFlutter"
+        android:allowBackup="true"
+        android:fullBackupContent="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:enableOnBackInvokedCallback="true">
+        
+        <!-- Activité principale -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -10,24 +24,41 @@
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
-            android:windowSoftInputMode="adjustResize">
-            <!-- Specifies an Android theme to apply to this Activity as soon as
-                 the Android process has started. This theme is visible to the user
-                 while the Flutter UI initializes. After that, this theme continues
-                 to determine the Window background behind the Flutter UI. -->
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait">
+            
+            <!-- Intent filter pour le lancement -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+            
+            <!-- Métadonnées pour le thème de lancement -->
             <meta-data
               android:name="io.flutter.embedding.android.NormalTheme"
               android:resource="@style/NormalTheme"
               />
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
-        <!-- Don't delete the meta-data below.
-             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
+        
+        <!-- Métadonnées Flutter -->
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+            
+        <!-- Métadonnées de l'application -->
+        <meta-data
+            android:name="com.example.abwar_flutter.APP_NAME"
+            android:value="ABWAR" />
+        <meta-data
+            android:name="com.example.abwar_flutter.APP_DESCRIPTION"
+            android:value="Quiz interactif et éducatif" />
+        <meta-data
+            android:name="com.example.abwar_flutter.APP_VERSION"
+            android:value="1.0.0" />
+            
+        <!-- Configuration pour le support des écrans -->
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.4" />
     </application>
 </manifest>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Couleurs principales d'ABWAR -->
+    <color name="primary">#FF6B35</color>
+    <color name="primary_dark">#E55A2B</color>
+    <color name="primary_light">#FF8A65</color>
+    
+    <!-- Couleurs secondaires -->
+    <color name="secondary">#1E3A8A</color>
+    <color name="secondary_dark">#1E40AF</color>
+    <color name="secondary_light">#3B82F6</color>
+    
+    <!-- Couleurs d'accent -->
+    <color name="accent">#10B981</color>
+    <color name="accent_dark">#059669</color>
+    <color name="accent_light">#34D399</color>
+    
+    <!-- Couleurs de succès/erreur -->
+    <color name="success">#10B981</color>
+    <color name="warning">#F59E0B</color>
+    <color name="error">#EF4444</color>
+    
+    <!-- Couleurs neutres -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="gray_light">#F3F4F6</color>
+    <color name="gray">#9CA3AF</color>
+    <color name="gray_dark">#374151</color>
+    
+    <!-- Couleurs de fond -->
+    <color name="background_primary">#1E3A8A</color>
+    <color name="background_secondary">#3B82F6</color>
+    <color name="background_tertiary">#60A5FA</color>
+    
+    <!-- Couleurs de texte -->
+    <color name="text_primary">#1F2937</color>
+    <color name="text_secondary">#6B7280</color>
+    <color name="text_light">#FFFFFF</color>
+</resources>
