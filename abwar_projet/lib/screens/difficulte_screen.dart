@@ -80,10 +80,10 @@ class DifficulteScreen extends StatelessWidget {
                           children: [
                             _buildDifficultyButton(
                               context,
-                              'FACILE',
-                              'Niveau débutant',
+                              'On vient de commencer la soirée, tout va bien, on boit les premières bières !',
+                              '1 à 3 gorgées.',
                               Icons.sentiment_satisfied,
-                              const Color(0xFF10B981),
+                              const Color(0xFF10B981).withValues(alpha: 0.25),
                               () => _startGame(context, 'facile'),
                             ),
                             
@@ -91,10 +91,10 @@ class DifficulteScreen extends StatelessWidget {
                             
                             _buildDifficultyButton(
                               context,
-                              'MOYEN',
-                              'Niveau intermédiaire',
+                              'On commence à être entamés, on passe à l\'alcool fort.',
+                              '1 à 6 gorgées.',
                               Icons.sentiment_neutral,
-                              const Color(0xFFFF6B35),
+                              const Color(0xFFFF6B35).withValues(alpha: 0.25),
                               () => _startGame(context, 'moyen'),
                             ),
                             
@@ -102,10 +102,10 @@ class DifficulteScreen extends StatelessWidget {
                             
                             _buildDifficultyButton(
                               context,
-                              'DIFFICILE',
-                              'Niveau expert',
+                              'Il est 5h du matin. Pourquoi je lance ce jeu déjà ?',
+                              '1 à 9 gorgées.',
                               Icons.sentiment_dissatisfied,
-                              const Color(0xFFEF4444),
+                              const Color(0xFFEF4444).withValues(alpha: 0.25),
                               () => _startGame(context, 'difficile'),
                             ),
                           ],
@@ -169,14 +169,13 @@ class DifficulteScreen extends StatelessWidget {
     VoidCallback onPressed,
   ) {
     return Container(
-      width: double.infinity,
       constraints: const BoxConstraints(
         minHeight: 80,
-        maxHeight: 100,
+        maxHeight: 150,
       ),
       decoration: BoxDecoration(
         color: color,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
             color: color.withOpacity(0.4),
@@ -192,6 +191,7 @@ class DifficulteScreen extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
             child: Row(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Icon(
                   icon,
@@ -199,7 +199,7 @@ class DifficulteScreen extends StatelessWidget {
                   size: 30,
                 ),
                 const SizedBox(width: 15),
-                Expanded(
+                Flexible(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -212,7 +212,6 @@ class DifficulteScreen extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           letterSpacing: 0.5,
                         ),
-                        overflow: TextOverflow.ellipsis,
                       ),
                       const SizedBox(height: 2),
                       Text(
@@ -221,11 +220,11 @@ class DifficulteScreen extends StatelessWidget {
                           color: Colors.white.withOpacity(0.9),
                           fontSize: 13,
                         ),
-                        overflow: TextOverflow.ellipsis,
                       ),
                     ],
                   ),
                 ),
+                const SizedBox(width: 15),
                 const Icon(
                   Icons.arrow_forward_ios,
                   color: Colors.white,
