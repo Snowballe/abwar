@@ -1,14 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'difficulte_screen.dart';
-import 'trois_screen.dart';
 
-class AccueilScreen extends StatelessWidget {
+class AccueilScreen extends StatefulWidget {
   const AccueilScreen({super.key});
+
+  @override
+  State<AccueilScreen> createState() => _AccueilScreenState();
+}
+
+class _AccueilScreenState extends State<AccueilScreen> {
+  final List<TextEditingController> _nameControllers = [];
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialiser 4 champs de base comme dans AccueilActivity.java
+    for (int i = 0; i < 4; i++) {
+      _nameControllers.add(TextEditingController());
+    }
+  }
+
+  @override
+  void dispose() {
+    for (var controller in _nameControllers) {
+      controller.dispose();
+    }
+    super.dispose();
+  }
+
+  void _addNewTextField() {
+    setState(() {
+      _nameControllers.add(TextEditingController());
+    });
+  }
+
+  List<String> _getValidNames() {
+    List<String> validNames = [];
+    for (var controller in _nameControllers) {
+      String name = controller.text.trim();
+      if (name.isNotEmpty) {
+        validNames.add(name);
+      }
+    }
+    return validNames;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -21,84 +63,183 @@ class AccueilScreen extends StatelessWidget {
             ],
           ),
         ),
-        child: SafeArea(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // Logo ABWAR
-                Container(
-                  width: 200,
-                  height: 200,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(100),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.3),
-                        blurRadius: 20,
-                        offset: const Offset(0, 10),
+        child: Stack(
+          children: [
+            // Contenu principal avec padding
+            SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  children: [
+                    // Logo ABWAR
+                    Container(
+                      width: 120,
+                      height: 120,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(60),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.3),
+                            blurRadius: 20,
+                            offset: const Offset(0, 10),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                  child: const Center(
-                    child: Text(
-                      'ABWAR',
-                      style: TextStyle(
-                        fontSize: 32,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFFFF6B35),
-                        letterSpacing: 2,
+                      child: const Center(
+                        child: Text(
+                          'ABWAR',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFFFF6B35),
+                            letterSpacing: 2,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                    
+                    const SizedBox(height: 20),
+                    
+                                         // ScrollView avec les champs de prénoms
+                     Container(
+                       height: MediaQuery.of(context).size.height * 0.5, // Hauteur fixe à 50% de l'écran
+                       child: Container(
+                         padding: const EdgeInsets.all(20),
+                         decoration: BoxDecoration(
+                           color: Colors.white.withOpacity(0.1),
+                           borderRadius: BorderRadius.circular(10),
+                           border: Border.all(color: Colors.white.withOpacity(0.2)),
+                         ),
+                         child: Column(
+                           children: [
+                             Row(
+                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                               children: [
+                                 Text(
+                                   'Joueurs (${_nameControllers.length})',
+                                   style: const TextStyle(
+                                     color: Colors.white,
+                                     fontSize: 18,
+                                     fontWeight: FontWeight.bold,
+                                   ),
+                                 ),
+                                 Container(
+                                   decoration: BoxDecoration(
+                                     color: const Color(0xFFFF6B35),
+                                     borderRadius: BorderRadius.circular(15),
+                                   ),
+                                   child: IconButton(
+                                     onPressed: _addNewTextField,
+                                     icon: const Icon(Icons.add, color: Colors.white),
+                                     tooltip: 'Ajouter un joueur',
+                                   ),
+                                 ),
+                               ],
+                             ),
+                             const SizedBox(height: 15),
+                             Expanded(
+                               child: Form(
+                                 key: _formKey,
+                                 child: ListView.builder(
+                                   itemCount: _nameControllers.length,
+                                   itemBuilder: (context, index) {
+                                     return Container(
+                                       margin: const EdgeInsets.only(bottom: 15),
+                                       child: TextFormField(
+                                         controller: _nameControllers[index],
+                                         style: const TextStyle(
+                                           color: Colors.white,
+                                           fontSize: 16,
+                                         ),
+                                         decoration: InputDecoration(
+                                           hintText: 'Joueur N°${index + 1}',
+                                           hintStyle: TextStyle(
+                                             color: Colors.white.withOpacity(0.7),
+                                           ),
+                                           border: OutlineInputBorder(
+                                             borderRadius: BorderRadius.circular(15),
+                                             borderSide: BorderSide(
+                                               color: Colors.white.withOpacity(0.3),
+                                             ),
+                                           ),
+                                           enabledBorder: OutlineInputBorder(
+                                             borderRadius: BorderRadius.circular(15),
+                                             borderSide: BorderSide(
+                                               color: Colors.white.withOpacity(0.3),
+                                             ),
+                                           ),
+                                           focusedBorder: OutlineInputBorder(
+                                             borderRadius: BorderRadius.circular(15),
+                                             borderSide: const BorderSide(color: Colors.white),
+                                           ),
+                                           filled: true,
+                                           fillColor: Colors.white.withOpacity(0.1),
+                                         ),
+                                         inputFormatters: [
+                                           FilteringTextInputFormatter.allow(RegExp(r'[a-zA-ZÀ-ÿ\s]')),
+                                           LengthLimitingTextInputFormatter(16),
+                                         ],
+                                         textCapitalization: TextCapitalization.words,
+                                         validator: (value) {
+                                           // Validation optionnelle - on peut laisser vide
+                                           return null;
+                                         },
+                                       ),
+                                     );
+                                   },
+                                 ),
+                               ),
+                             ),
+                           ],
+                         ),
+                       ),
+                     ),
+                  ],
                 ),
-                
-                const SizedBox(height: 60),
-                
-                // Bouton Jouer
-                _buildButton(
-                  context,
-                  'JOUER',
-                  Icons.play_arrow,
-                  const Color(0xFFFF6B35),
-                  () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const DifficulteScreen(),
-                    ),
-                  ),
-                ),
-                
-                const SizedBox(height: 20),
-                
-                // Bouton Règles
-                _buildButton(
-                  context,
-                  'RÈGLES',
-                  Icons.rule,
-                  const Color(0xFF10B981),
-                  () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const TroisScreen(),
-                    ),
-                  ),
-                ),
-                
-                const SizedBox(height: 20),
-                
-                // Bouton Quitter
-                _buildButton(
-                  context,
-                  'QUITTER',
-                  Icons.exit_to_app,
-                  const Color(0xFFEF4444),
-                  () => _showExitDialog(context),
-                ),
-              ],
+              ),
             ),
-          ),
+            
+            // Boutons positionnés en bas (seront cachés par le clavier)
+            Positioned(
+              bottom: 20,
+              left: 20,
+              right: 20,
+              child: Column(
+                children: [
+                  // Bouton Jouer
+                  _buildButton(
+                    context,
+                    'C\'est tarpi',
+                    Icons.play_arrow,
+                    const Color(0xFFFF6B35),
+                    () {
+                      List<String> validNames = _getValidNames();
+                      if (validNames.isNotEmpty) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const DifficulteScreen(),
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                  
+                  const SizedBox(height: 15),
+                  
+                  // Bouton Quitter
+                  _buildButton(
+                    context,
+                    'QUITTER',
+                    Icons.exit_to_app,
+                    const Color(0xFFEF4444),
+                    () => _showExitDialog(context),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
