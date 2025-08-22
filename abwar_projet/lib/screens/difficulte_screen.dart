@@ -9,17 +9,12 @@ class DifficulteScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color(0xFF1E3A8A),
-              Color(0xFF3B82F6),
-              Color(0xFF60A5FA),
-            ],
+         decoration: const BoxDecoration(
+           image: DecorationImage(
+             image: AssetImage('assets/images/iceberg.jpg'),
+             fit: BoxFit.cover,
+           ),
           ),
-        ),
         child: SafeArea(
           child: Column(
             children: [
@@ -58,56 +53,43 @@ class DifficulteScreen extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      const SizedBox(height: 30),
-                      
-                      // Titre principal
-                      const Text(
-                        'Choisissez votre niveau',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      
-                      const SizedBox(height: 50),
+                                             const SizedBox(height: 30),
                       
                       // Boutons de difficulté
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Column(
                           children: [
-                            _buildDifficultyButton(
-                              context,
-                              'On vient de commencer la soirée, tout va bien, on boit les premières bières !',
-                              '1 à 3 gorgées.',
-                              Icons.sentiment_satisfied,
-                              const Color(0xFF10B981).withValues(alpha: 0.25),
-                              () => _startGame(context, 'facile'),
-                            ),
+                                                         _buildDifficultyButton(
+                               context,
+                               'On vient de commencer la soirée, tout va bien, on boit les premières bières !',
+                               '1 à 3 gorgées.',
+                               'assets/images/diff1.png',
+                               const Color(0xFF10B981).withValues(alpha: 0.25),
+                               () => _startGame(context, 'facile'),
+                             ),
                             
                             const SizedBox(height: 25),
                             
-                            _buildDifficultyButton(
-                              context,
-                              'On commence à être entamés, on passe à l\'alcool fort.',
-                              '1 à 6 gorgées.',
-                              Icons.sentiment_neutral,
-                              const Color(0xFFFF6B35).withValues(alpha: 0.25),
-                              () => _startGame(context, 'moyen'),
-                            ),
+                                                         _buildDifficultyButton(
+                               context,
+                               'On commence à être entamés, on passe à l\'alcool fort.',
+                               '1 à 6 gorgées.',
+                               'assets/images/diff2.png',
+                               const Color(0xFFFF6B35).withValues(alpha: 0.25),
+                               () => _startGame(context, 'moyen'),
+                             ),
                             
                             const SizedBox(height: 25),
                             
-                            _buildDifficultyButton(
-                              context,
-                              'Il est 5h du matin. Pourquoi je lance ce jeu déjà ?',
-                              '1 à 9 gorgées.',
-                              Icons.sentiment_dissatisfied,
-                              const Color(0xFFEF4444).withValues(alpha: 0.25),
-                              () => _startGame(context, 'difficile'),
-                            ),
+                                                         _buildDifficultyButton(
+                               context,
+                               'Il est 5h du matin. Pourquoi je lance ce jeu déjà ?',
+                               '1 à 9 gorgées.',
+                               'assets/images/diff3.png',
+                               const Color(0xFFEF4444).withValues(alpha: 0.25),
+                               () => _startGame(context, 'difficile'),
+                             ),
                           ],
                         ),
                       ),
@@ -164,7 +146,7 @@ class DifficulteScreen extends StatelessWidget {
     BuildContext context,
     String title,
     String subtitle,
-    IconData icon,
+    String imagePath,
     Color color,
     VoidCallback onPressed,
   ) {
@@ -192,12 +174,12 @@ class DifficulteScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
             child: Row(
               mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(
-                  icon,
-                  color: Colors.white,
-                  size: 30,
-                ),
+                             children: [
+                 Image.asset(
+                   imagePath,
+                   width: 30,
+                   height: 30,
+                 ),
                 const SizedBox(width: 15),
                 Flexible(
                   child: Column(
