@@ -1,377 +1,384 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'dart:convert';
 import 'dart:math';
 import 'after_game_screen.dart';
-import '../models/question.dart';
 
 class GameScreen extends StatefulWidget {
   final String difficulty;
+  final List<String> players;
   
-  const GameScreen({super.key, required this.difficulty});
+  const GameScreen({super.key, required this.difficulty, required this.players});
 
   @override
   State<GameScreen> createState() => _GameScreenState();
 }
 
-class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
-  late AnimationController _timerController;
-  late AnimationController _questionController;
-  late Animation<double> _timerAnimation;
-  late Animation<double> _questionAnimation;
+class _GameScreenState extends State<GameScreen> {
+  String currentQuestion = "Est-ce que tout le monde est prêt ?";
+  List<Map<String, dynamic>> questions = [];
+  List<int> usedQuestionIndexes = [];
+  List<int> usedPlayerIndexes = [];
+  int questionCount = 0;
+  int maxQuestions = 50;
   
-  int currentQuestionIndex = 0;
-  int score = 0;
-  int timeLeft = 30;
-  bool isGameActive = true;
-  String? selectedAnswer;
-  bool showResult = false;
+  // Gestion des difficultés
+  late int minGulps;
+  late int maxGulps;
   
-  // Questions par difficulté
-  late List<Question> questions;
-
+  // Couleurs de fond
+  final List<Color> backgroundColors = [
+    const Color(0xFFE9CE2C), // Jaune
+    const Color(0xFFE88986), // Rose
+    const Color(0xFF00CC83), // Vert
+    const Color(0xFF55868C), // Bleu-gris
+    const Color(0xFF022B3A), // Bleu foncé
+  ];
+  
+  Color currentBackgroundColor = Colors.black;
+  Color currentTextColor = Colors.white;
+  
+  // Scores des joueurs
+  Map<String, int> playerScores = {};
+  
   @override
   void initState() {
     super.initState();
-    questions = QuestionBank.getQuestionsForDifficulty(widget.difficulty);
-    _initializeAnimations();
-    _startTimer();
+    _initializeGame();
+    _loadQuestions();
   }
-
-  void _initializeAnimations() {
-    _timerController = AnimationController(
-      duration: const Duration(seconds: 30),
-      vsync: this,
-    );
-    
-    _questionController = AnimationController(
-      duration: const Duration(milliseconds: 500),
-      vsync: this,
-    );
-    
-    _timerAnimation = Tween<double>(
-      begin: 1.0,
-      end: 0.0,
-    ).animate(CurvedAnimation(
-      parent: _timerController,
-      curve: Curves.linear,
-    ));
-    
-    _questionAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _questionController,
-      curve: Curves.easeInOut,
-    ));
-    
-    _questionController.forward();
-  }
-
-  void _startTimer() {
-    _timerController.forward();
-    
-    Future.delayed(const Duration(seconds: 30), () {
-      if (mounted && isGameActive) {
-        _endGame();
-      }
-    });
-  }
-
-  void _selectAnswer(int answerIndex) {
-    if (!isGameActive || selectedAnswer != null) return;
-    
-    setState(() {
-      selectedAnswer = answerIndex.toString();
-      showResult = true;
-    });
-    
-    HapticFeedback.mediumImpact();
-    
-    // Vérifier la réponse
-    final currentQuestion = questions[currentQuestionIndex];
-    if (answerIndex == currentQuestion.correctAnswer) {
-      score++;
+  
+  void _initializeGame() {
+    // Initialiser les scores des joueurs
+    for (String player in widget.players) {
+      playerScores[player] = 0;
     }
     
-    // Attendre un peu puis passer à la question suivante
-    Future.delayed(const Duration(seconds: 2), () {
-      if (mounted) {
-        _nextQuestion();
-      }
-    });
+    // Définir les gorgées selon la difficulté
+    switch (widget.difficulty) {
+      case 'facile':
+        minGulps = 1;
+        maxGulps = 3;
+        break;
+      case 'moyen':
+        minGulps = 1;
+        maxGulps = 6;
+        break;
+      case 'difficile':
+        minGulps = 1;
+        maxGulps = 9;
+        break;
+      default:
+        minGulps = 1;
+        maxGulps = 3;
+    }
+    
+    // Forcer l'orientation paysage
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
   }
-
-  void _nextQuestion() {
-    if (currentQuestionIndex < questions.length - 1) {
+  
+  Future<void> _loadQuestions() async {
+    try {
+      final String jsonString = await DefaultAssetBundle.of(context).loadString('assets/questions.json');
+      final List<dynamic> jsonList = json.decode(jsonString);
       setState(() {
-        currentQuestionIndex++;
-        selectedAnswer = null;
-        showResult = false;
+        questions = jsonList.cast<Map<String, dynamic>>();
       });
-      
-      _questionController.reset();
-      _questionController.forward();
-    } else {
-      _endGame();
+    } catch (e) {
+      print('Erreur lors du chargement des questions: $e');
     }
   }
-
-  void _endGame() {
+  
+  void _nextQuestion() {
+    if (questionCount >= maxQuestions) {
+      _endGame();
+      return;
+    }
+    
+    if (questions.isEmpty) return;
+    
+    // Sélectionner une question aléatoire non utilisée
+    int randomQuestionIndex;
+    do {
+      randomQuestionIndex = Random().nextInt(questions.length);
+    } while (usedQuestionIndexes.contains(randomQuestionIndex));
+    
+    // Sélectionner un joueur aléatoire non utilisé pour cette question
+    int randomPlayerIndex;
+    do {
+      randomPlayerIndex = Random().nextInt(widget.players.length);
+    } while (usedPlayerIndexes.contains(randomPlayerIndex));
+    
+    // Sélectionner un nombre aléatoire de gorgées
+    int randomGulps = Random().nextInt(maxGulps - minGulps + 1) + minGulps;
+    
+    // Récupérer la question
+    String question = questions[randomQuestionIndex]['question'];
+    
+    // Remplacer les placeholders
+    question = question.replaceAll('%plr', widget.players[randomPlayerIndex]);
+    question = question.replaceAll('%gog', randomGulps.toString());
+    
+    // Changer la couleur de fond
+    Color newBackgroundColor = backgroundColors[Random().nextInt(backgroundColors.length)];
+    
     setState(() {
-      isGameActive = false;
+      currentQuestion = question;
+      currentBackgroundColor = newBackgroundColor;
+      currentTextColor = newBackgroundColor == const Color(0xFFE9CE2C) ? Colors.black : Colors.white;
+      usedQuestionIndexes.add(randomQuestionIndex);
+      usedPlayerIndexes.add(randomPlayerIndex);
+      questionCount++;
     });
     
-    _timerController.stop();
+    // Réinitialiser la liste des joueurs utilisés pour la prochaine question
+    if (questionCount % 3 == 0) {
+      usedPlayerIndexes.clear();
+    }
+  }
+  
+  void _endGame() {
+    // Restaurer l'orientation normale
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
     
-    // Naviguer vers l'écran de fin de partie
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
         builder: (context) => AfterGameScreen(
-          score: score,
-          totalQuestions: questions.length,
+          players: widget.players,
+          scores: playerScores,
           difficulty: widget.difficulty,
         ),
       ),
     );
   }
-
+  
+  void _updatePlayerScore(String playerName, int delta) {
+    setState(() {
+      playerScores[playerName] = (playerScores[playerName] ?? 0) + delta;
+      if (playerScores[playerName]! < 0) {
+        playerScores[playerName] = 0;
+      }
+    });
+  }
+  
   @override
   void dispose() {
-    _timerController.dispose();
-    _questionController.dispose();
+    // Restaurer l'orientation normale
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final currentQuestion = questions[currentQuestionIndex];
-    
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color(0xFF1E3A8A),
-              Color(0xFF3B82F6),
-              Color(0xFF60A5FA),
-            ],
-          ),
-        ),
-        child: SafeArea(
-          child: Column(
-            children: [
-              // Header avec score et timer
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Row(
-                  children: [
-                    IconButton(
-                      onPressed: () => _showExitDialog(context),
-                      icon: const Icon(
-                        Icons.close,
-                        color: Colors.white,
-                        size: 30,
-                      ),
-                    ),
-                    Expanded(
-                      child: Column(
-                        children: [
-                                                  Text(
-                          'Question ${currentQuestionIndex + 1}/${questions.length}',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
+      body: Stack(
+        children: [
+          Container(
+            color: currentBackgroundColor,
+            child: SafeArea(
+              child: Row(
+                children: [
+                  // Zone de jeu principale (gauche)
+                  Expanded(
+                    flex: 2,
+                    child: Column(
+                      children: [
+                        // Header
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Row(
+                            children: [
+                              IconButton(
+                                onPressed: () => _showExitDialog(context),
+                                icon: Icon(
+                                  Icons.close,
+                                  color: currentTextColor,
+                                  size: 30,
+                                ),
+                              ),
+                              
+                              // Logo ABWAR
+                              Container(
+                                width: 60,
+                                height: 60,
+                                decoration: BoxDecoration(
+                                  color: currentTextColor.withOpacity(0.1),
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    'ABWAR',
+                                    style: TextStyle(
+                                      color: currentTextColor,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                          const SizedBox(height: 5),
-                          Text(
-                            'Score: $score',
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
+                        
+                        const Spacer(),
+                        
+                        // Question
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          margin: const EdgeInsets.symmetric(horizontal: 5),
+                          
+                          child: Text(
+                            currentQuestion,
+                            style: TextStyle(
+                              fontSize: 24,
                               fontWeight: FontWeight.bold,
+                              color: currentTextColor,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        
+                        const Spacer(),
+                      ],
+                    ),
+                  ),
+                  
+                  // Scoreboard des joueurs (droite)
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.25, // 25% de la largeur de l'écran
+                    child: Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.1),
+                        border: Border(
+                          left: BorderSide(
+                            color: currentTextColor.withOpacity(0.3),
+                            width: 2,
+                          ),
+                        ),
+                      ),
+                      child: Column(
+                        children: [
+                          Text(
+                            'SCORES',
+                            style: TextStyle(
+                              color: currentTextColor,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          Expanded(
+                            child: ListView.builder(
+                              itemCount: widget.players.length,
+                              itemBuilder: (context, index) {
+                                String playerName = widget.players[index];
+                                int score = playerScores[playerName] ?? 0;
+                                
+                                return Container(
+                                  margin: const EdgeInsets.only(bottom: 15),
+                                  padding: const EdgeInsets.all(15),
+                                  decoration: BoxDecoration(
+                                    color: currentTextColor.withOpacity(0.1),
+                                    borderRadius: BorderRadius.circular(15),
+                                    border: Border.all(
+                                      color: currentTextColor.withOpacity(0.3),
+                                      width: 1,
+                                    ),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        '$playerName : $score',
+                                        style: TextStyle(
+                                          color: currentTextColor,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 10),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          ElevatedButton(
+                                            onPressed: () => _updatePlayerScore(playerName, -1),
+                                            style: ElevatedButton.styleFrom(
+                                              backgroundColor: Colors.red,
+                                              foregroundColor: Colors.white,
+                                              minimumSize: const Size(40, 40),
+                                              shape: const CircleBorder(),
+                                            ),
+                                            child: const Text('-'),
+                                          ),
+                                          ElevatedButton(
+                                            onPressed: () => _updatePlayerScore(playerName, 1),
+                                            style: ElevatedButton.styleFrom(
+                                              backgroundColor: Colors.green,
+                                              foregroundColor: Colors.white,
+                                              minimumSize: const Size(40, 40),
+                                              shape: const CircleBorder(),
+                                            ),
+                                            child: const Text('+'),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
                             ),
                           ),
                         ],
                       ),
                     ),
-                    // Timer circulaire
-                    Container(
-                      width: 60,
-                      height: 60,
-                      child: AnimatedBuilder(
-                        animation: _timerAnimation,
-                        builder: (context, child) {
-                          return CircularProgressIndicator(
-                            value: _timerAnimation.value,
-                            strokeWidth: 6,
-                            backgroundColor: Colors.white.withOpacity(0.3),
-                            valueColor: const AlwaysStoppedAnimation<Color>(
-                              Colors.white,
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              
-              const Spacer(),
-              
-              // Question
-              FadeTransition(
-                opacity: _questionAnimation,
-                child: Container(
-                  padding: const EdgeInsets.all(30),
-                  margin: const EdgeInsets.symmetric(horizontal: 20),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.2),
-                        blurRadius: 20,
-                        offset: const Offset(0, 10),
-                      ),
-                    ],
-                  ),
-                  child: Text(
-                    currentQuestion.question,
-                    style: const TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF1E3A8A),
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ),
-              
-              const SizedBox(height: 40),
-              
-              // Réponses
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  children: List.generate(
-                    currentQuestion.answers.length,
-                    (index) => _buildAnswerButton(
-                      context,
-                      currentQuestion.answers[index],
-                      index,
-                      currentQuestion.correctAnswer,
-                    ),
-                  ),
-                ),
-              ),
-              
-              const Spacer(),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildAnswerButton(
-    BuildContext context,
-    String answer,
-    int index,
-    int correctAnswer,
-  ) {
-    final isSelected = selectedAnswer == index.toString();
-    final isCorrect = index == correctAnswer;
-    final showCorrectAnswer = showResult && isCorrect;
-    
-    Color buttonColor = Colors.white;
-    Color textColor = const Color(0xFF1E3A8A);
-    
-    if (showResult) {
-      if (isSelected && isCorrect) {
-        buttonColor = const Color(0xFF10B981);
-        textColor = Colors.white;
-      } else if (isSelected && !isCorrect) {
-        buttonColor = const Color(0xFFEF4444);
-        textColor = Colors.white;
-      } else if (showCorrectAnswer) {
-        buttonColor = const Color(0xFF10B981);
-        textColor = Colors.white;
-      }
-    }
-    
-    return Container(
-      width: double.infinity,
-      margin: const EdgeInsets.only(bottom: 15),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          borderRadius: BorderRadius.circular(15),
-          onTap: () => _selectAnswer(index),
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
-            decoration: BoxDecoration(
-              color: buttonColor,
-              borderRadius: BorderRadius.circular(15),
-              boxShadow: [
-                BoxShadow(
-                  color: buttonColor.withOpacity(0.3),
-                  blurRadius: 10,
-                  offset: const Offset(0, 5),
-                ),
-              ],
-            ),
-            child: Row(
-              children: [
-                Container(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: textColor.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Center(
-                    child: Text(
-                      String.fromCharCode(65 + index), // A, B, C, D
-                      style: TextStyle(
-                        color: textColor,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 20),
-                Expanded(
-                  child: Text(
-                    answer,
-                    style: TextStyle(
-                      color: textColor,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-                if (showResult)
-                  Icon(
-                    isSelected && isCorrect
-                        ? Icons.check_circle
-                        : isSelected && !isCorrect
-                            ? Icons.cancel
-                            : showCorrectAnswer
-                                ? Icons.check_circle
-                                : null,
-                    color: textColor,
-                    size: 24,
-                  ),
-              ],
             ),
           ),
-        ),
+          
+          // Bouton NEXT sticky en bas
+          Positioned(
+            bottom: 20,
+            left: 20, // Marge de 20px depuis la gauche
+            right: MediaQuery.of(context).size.width * 0.25 + 20, // Largeur du scoreboard + marge
+            child: Container(
+              height: 50,
+              child: ElevatedButton(
+                onPressed: _nextQuestion,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: currentTextColor,
+                  foregroundColor: currentBackgroundColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                  elevation: 8,
+                ),
+                child: const Text(
+                  'NEXT',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

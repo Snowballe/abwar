@@ -219,7 +219,7 @@ class _AccueilScreenState extends State<AccueilScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const DifficulteScreen(),
+                            builder: (context) => DifficulteScreen(players: validNames),
                           ),
                         );
                       }

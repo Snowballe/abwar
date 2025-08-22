@@ -3,7 +3,9 @@ import 'package:flutter/services.dart';
 import 'game_screen.dart';
 
 class DifficulteScreen extends StatelessWidget {
-  const DifficulteScreen({super.key});
+  final List<String> players;
+  
+  const DifficulteScreen({super.key, required this.players});
 
   @override
   Widget build(BuildContext context) {
@@ -49,12 +51,13 @@ class DifficulteScreen extends StatelessWidget {
                 ),
               ),
               
+             
+              const SizedBox(height: 30),
+              
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                                             const SizedBox(height: 30),
-                      
                       // Boutons de difficulté
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -92,45 +95,7 @@ class DifficulteScreen extends StatelessWidget {
                              ),
                           ],
                         ),
-                      ),
-                      
-                      const SizedBox(height: 50),
-                      
-                      // Indicateur de progression
-                      Container(
-                        padding: const EdgeInsets.all(20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 12,
-                              height: 12,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(6),
-                              ),
-                            ),
-                            const SizedBox(width: 8),
-                            Container(
-                              width: 12,
-                              height: 12,
-                              decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.5),
-                                borderRadius: BorderRadius.circular(6),
-                              ),
-                            ),
-                            const SizedBox(width: 8),
-                            Container(
-                              width: 12,
-                              height: 12,
-                              decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.3),
-                                borderRadius: BorderRadius.circular(6),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                      ),  
                     ],
                   ),
                 ),
@@ -153,7 +118,7 @@ class DifficulteScreen extends StatelessWidget {
     return Container(
       constraints: const BoxConstraints(
         minHeight: 80,
-        maxHeight: 150,
+        maxHeight: 170,
       ),
       decoration: BoxDecoration(
         color: color,
@@ -171,15 +136,26 @@ class DifficulteScreen extends StatelessWidget {
         child: GestureDetector(
           onTap: onPressed,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
             child: Row(
               mainAxisSize: MainAxisSize.min,
-                             children: [
-                 Image.asset(
-                   imagePath,
-                   width: 30,
-                   height: 30,
-                 ),
+              children: [
+                /// ✅ Image prend toute la hauteur du container
+                SizedBox(
+                  width: 120,
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      bottomLeft: Radius.circular(10),
+                    ),
+                    child: Image.asset(
+                      imagePath,
+                      fit: BoxFit.cover,
+                      height: double.infinity,
+                    ),
+                  ),
+                ),
+              
                 const SizedBox(width: 15),
                 Flexible(
                   child: Column(
@@ -227,7 +203,10 @@ class DifficulteScreen extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => GameScreen(difficulty: difficulty),
+        builder: (context) => GameScreen(
+          difficulty: difficulty,
+          players: players,
+        ),
       ),
     );
   }

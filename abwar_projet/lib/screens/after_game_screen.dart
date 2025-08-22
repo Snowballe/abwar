@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'difficulte_screen.dart';
 import 'accueil_screen.dart';
 
 class AfterGameScreen extends StatefulWidget {
-  final int score;
-  final int totalQuestions;
+  final List<String> players;
+  final Map<String, int> scores;
   final String difficulty;
   
   const AfterGameScreen({
     super.key,
-    required this.score,
-    required this.totalQuestions,
+    required this.players,
+    required this.scores,
     required this.difficulty,
   });
 
@@ -27,17 +24,16 @@ class _AfterGameScreenState extends State<AfterGameScreen>
   late Animation<double> _scoreAnimation;
   late Animation<double> _celebrateAnimation;
   
-  double percentage = 0.0;
   String message = '';
   Color messageColor = Colors.white;
-  bool isHighScore = false;
+  String winner = '';
+  int maxScore = 0;
 
   @override
   void initState() {
     super.initState();
     _initializeAnimations();
     _calculateResults();
-    _checkHighScore();
   }
 
   void _initializeAnimations() {
@@ -72,34 +68,33 @@ class _AfterGameScreenState extends State<AfterGameScreen>
   }
 
   void _calculateResults() {
-    percentage = (widget.score / widget.totalQuestions) * 100;
-    
-    if (percentage >= 80) {
-      message = 'Excellent ! Vous êtes un expert !';
-      messageColor = const Color(0xFF10B981);
-    } else if (percentage >= 60) {
-      message = 'Bien joué ! Continuez comme ça !';
-      messageColor = const Color(0xFFFF6B35);
-    } else if (percentage >= 40) {
-      message = 'Pas mal ! Encore un peu d\'effort !';
-      messageColor = const Color(0xFFFFA500);
-    } else {
-      message = 'Ne vous découragez pas ! Continuez à apprendre !';
-      messageColor = const Color(0xFFEF4444);
+    // Trouver le gagnant (celui avec le plus de gorgées)
+    maxScore = 0;
+    for (String player in widget.players) {
+      int score = widget.scores[player] ?? 0;
+      if (score > maxScore) {
+        maxScore = score;
+        winner = player;
+      }
     }
-  }
-
-  Future<void> _checkHighScore() async {
-    final prefs = await SharedPreferences.getInstance();
-    final key = 'highscore_${widget.difficulty}';
-    final currentHighScore = prefs.getInt(key) ?? 0;
     
-    if (widget.score > currentHighScore) {
-      setState(() {
-        isHighScore = true;
-      });
-      await prefs.setInt(key, widget.score);
-      HapticFeedback.heavyImpact();
+    // Définir le message selon la difficulté
+    switch (widget.difficulty) {
+      case 'facile':
+        message = 'Soirée tranquille terminée !';
+        messageColor = const Color(0xFF10B981);
+        break;
+      case 'moyen':
+        message = 'Soirée bien arrosée !';
+        messageColor = const Color(0xFFFF6B35);
+        break;
+      case 'difficile':
+        message = 'Soirée de folie terminée !';
+        messageColor = const Color(0xFFEF4444);
+        break;
+      default:
+        message = 'Partie terminée !';
+        messageColor = const Color(0xFF10B981);
     }
   }
 
@@ -134,15 +129,9 @@ class _AfterGameScreenState extends State<AfterGameScreen>
                 child: Row(
                   children: [
                     IconButton(
-                      onPressed: () => Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const AccueilScreen(),
-                        ),
-                        (route) => false,
-                      ),
+                      onPressed: () => Navigator.pop(context),
                       icon: const Icon(
-                        Icons.home,
+                        Icons.arrow_back_ios,
                         color: Colors.white,
                         size: 30,
                       ),
@@ -153,9 +142,9 @@ class _AfterGameScreenState extends State<AfterGameScreen>
                           'FIN DE PARTIE',
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 20,
+                            fontSize: 24,
                             fontWeight: FontWeight.bold,
-                            letterSpacing: 1,
+                            letterSpacing: 2,
                           ),
                         ),
                       ),
@@ -165,45 +154,76 @@ class _AfterGameScreenState extends State<AfterGameScreen>
                 ),
               ),
               
-              const Spacer(),
+              const SizedBox(height: 20),
               
-              // Message de félicitations
-              if (isHighScore)
-                ScaleTransition(
-                  scale: _celebrateAnimation,
+              // Message de fin
+              FadeTransition(
+                opacity: _celebrateAnimation,
+                child: Container(
+                  padding: const EdgeInsets.all(20),
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
+                  decoration: BoxDecoration(
+                    color: messageColor.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(
+                      color: messageColor,
+                      width: 2,
+                    ),
+                  ),
+                  child: Text(
+                    message,
+                    style: TextStyle(
+                      color: messageColor,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+              
+              const SizedBox(height: 30),
+              
+              // Gagnant
+              if (winner.isNotEmpty)
+                FadeTransition(
+                  opacity: _scoreAnimation,
                   child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 10,
-                    ),
+                    padding: const EdgeInsets.all(20),
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFFFD700),
-                      borderRadius: BorderRadius.circular(25),
-                      boxShadow: [
-                        BoxShadow(
-                          color: const Color(0xFFFFD700).withOpacity(0.5),
-                          blurRadius: 15,
-                          offset: const Offset(0, 5),
-                        ),
-                      ],
+                      color: Colors.amber.withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(
+                        color: Colors.amber,
+                        width: 2,
+                      ),
                     ),
-                    child: const Row(
-                      mainAxisSize: MainAxisSize.min,
+                    child: Column(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.emoji_events,
-                          color: Color(0xFF1E3A8A),
-                          size: 24,
+                          color: Colors.amber,
+                          size: 50,
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(height: 10),
                         Text(
-                          'NOUVEAU RECORD !',
-                          style: TextStyle(
-                            color: Color(0xFF1E3A8A),
-                            fontSize: 16,
+                          '🏆 GAGNANT 🏆',
+                          style: const TextStyle(
+                            color: Colors.amber,
+                            fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
+                        const SizedBox(height: 5),
+                        Text(
+                          '$winner avec $maxScore gorgées !',
+                          style: const TextStyle(
+                            color: Colors.amber,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -211,81 +231,121 @@ class _AfterGameScreenState extends State<AfterGameScreen>
               
               const SizedBox(height: 30),
               
-              // Score principal
-              AnimatedBuilder(
-                animation: _scoreAnimation,
-                builder: (context, child) {
-                  return Transform.scale(
-                    scale: _scoreAnimation.value,
-                    child: Container(
-                      width: 200,
-                      height: 200,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(100),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.3),
-                            blurRadius: 20,
-                            offset: const Offset(0, 10),
+              // Classement des joueurs
+              Expanded(
+                child: Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(
+                      color: Colors.white.withOpacity(0.3),
+                      width: 1,
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Text(
+                          'CLASSEMENT FINAL',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
                           ),
-                        ],
-                      ),
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              '${widget.score}',
-                              style: const TextStyle(
-                                fontSize: 48,
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xFFFF6B35),
-                              ),
-                            ),
-                            Text(
-                              '/ ${widget.totalQuestions}',
-                              style: const TextStyle(
-                                fontSize: 20,
-                                color: Color(0xFF6B7280),
-                              ),
-                            ),
-                          ],
                         ),
                       ),
-                    ),
-                  );
-                },
-              ),
-              
-              const SizedBox(height: 30),
-              
-              // Pourcentage et message
-              Text(
-                '${percentage.toInt()}%',
-                style: TextStyle(
-                  color: messageColor,
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              
-              const SizedBox(height: 15),
-              
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 40),
-                child: Text(
-                  message,
-                  style: TextStyle(
-                    color: messageColor,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
+                      Expanded(
+                        child: ListView.builder(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          itemCount: widget.players.length,
+                          itemBuilder: (context, index) {
+                            // Trier les joueurs par score décroissant
+                            List<MapEntry<String, int>> sortedScores = 
+                                widget.scores.entries.toList()
+                                  ..sort((a, b) => b.value.compareTo(a.value));
+                            
+                            String playerName = sortedScores[index].key;
+                            int score = sortedScores[index].value;
+                            
+                            return Container(
+                              margin: const EdgeInsets.only(bottom: 15),
+                              padding: const EdgeInsets.all(15),
+                              decoration: BoxDecoration(
+                                color: index == 0 
+                                    ? Colors.amber.withOpacity(0.2)
+                                    : Colors.white.withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(15),
+                                border: Border.all(
+                                  color: index == 0 
+                                      ? Colors.amber 
+                                      : Colors.white.withOpacity(0.3),
+                                  width: index == 0 ? 2 : 1,
+                                ),
+                              ),
+                              child: Row(
+                                children: [
+                                  // Position
+                                  Container(
+                                    width: 40,
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                      color: index == 0 
+                                          ? Colors.amber 
+                                          : Colors.white.withOpacity(0.3),
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        '${index + 1}',
+                                        style: TextStyle(
+                                          color: index == 0 
+                                              ? Colors.black 
+                                              : Colors.white,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 15),
+                                  // Nom du joueur
+                                  Expanded(
+                                    child: Text(
+                                      playerName,
+                                      style: TextStyle(
+                                        color: index == 0 
+                                            ? Colors.amber 
+                                            : Colors.white,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  // Score
+                                  Text(
+                                    '$score gorgées',
+                                    style: TextStyle(
+                                      color: index == 0 
+                                          ? Colors.amber 
+                                          : Colors.white,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
                   ),
-                  textAlign: TextAlign.center,
                 ),
               ),
               
-              const Spacer(),
+              const SizedBox(height: 20),
               
               // Boutons d'action
               Padding(
@@ -297,11 +357,12 @@ class _AfterGameScreenState extends State<AfterGameScreen>
                       'REJOUER',
                       Icons.replay,
                       const Color(0xFFFF6B35),
-                      () => Navigator.pushReplacement(
+                      () => Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const DifficulteScreen(),
+                          builder: (context) => const AccueilScreen(),
                         ),
+                        (route) => false,
                       ),
                     ),
                     
