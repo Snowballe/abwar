@@ -78,24 +78,6 @@ class _AfterGameScreenState extends State<AfterGameScreen>
       }
     }
     
-    // Définir le message selon la difficulté
-    switch (widget.difficulty) {
-      case 'facile':
-        message = 'Soirée tranquille terminée !';
-        messageColor = const Color(0xFF10B981);
-        break;
-      case 'moyen':
-        message = 'Soirée bien arrosée !';
-        messageColor = const Color(0xFFFF6B35);
-        break;
-      case 'difficile':
-        message = 'Soirée de folie terminée !';
-        messageColor = const Color(0xFFEF4444);
-        break;
-      default:
-        message = 'Partie terminée !';
-        messageColor = const Color(0xFF10B981);
-    }
   }
 
   @override
@@ -154,35 +136,6 @@ class _AfterGameScreenState extends State<AfterGameScreen>
                 ),
               ),
               
-              const SizedBox(height: 20),
-              
-              // Message de fin
-              FadeTransition(
-                opacity: _celebrateAnimation,
-                child: Container(
-                  padding: const EdgeInsets.all(20),
-                  margin: const EdgeInsets.symmetric(horizontal: 20),
-                  decoration: BoxDecoration(
-                    color: messageColor.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(20),
-                    border: Border.all(
-                      color: messageColor,
-                      width: 2,
-                    ),
-                  ),
-                  child: Text(
-                    message,
-                    style: TextStyle(
-                      color: messageColor,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ),
-              
-              const SizedBox(height: 30),
               
               // Gagnant
               if (winner.isNotEmpty)
@@ -201,12 +154,7 @@ class _AfterGameScreenState extends State<AfterGameScreen>
                     ),
                     child: Column(
                       children: [
-                        const Icon(
-                          Icons.emoji_events,
-                          color: Colors.amber,
-                          size: 50,
-                        ),
-                        const SizedBox(height: 10),
+                        
                         Text(
                           '🏆 GAGNANT 🏆',
                           style: const TextStyle(
@@ -221,6 +169,15 @@ class _AfterGameScreenState extends State<AfterGameScreen>
                           style: const TextStyle(
                             color: Colors.amber,
                             fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        const SizedBox(height: 5),
+                        Text(
+                          'Venges-toi et distribues ${(maxScore*0.2).ceil()} gorgées !',
+                          style: const TextStyle(
+                            color: Colors.amber,
+                            fontSize: 14,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -273,15 +230,11 @@ class _AfterGameScreenState extends State<AfterGameScreen>
                               margin: const EdgeInsets.only(bottom: 15),
                               padding: const EdgeInsets.all(15),
                               decoration: BoxDecoration(
-                                color: index == 0 
-                                    ? Colors.amber.withOpacity(0.2)
-                                    : Colors.white.withOpacity(0.1),
+                                color: _getBackgroundColor(index),
                                 borderRadius: BorderRadius.circular(15),
                                 border: Border.all(
-                                  color: index == 0 
-                                      ? Colors.amber 
-                                      : Colors.white.withOpacity(0.3),
-                                  width: index == 0 ? 2 : 1,
+                                  color: _getBorderColor(index),
+                                  width: index < 3 ? 2 : 1,
                                 ),
                               ),
                               child: Row(
@@ -291,18 +244,14 @@ class _AfterGameScreenState extends State<AfterGameScreen>
                                     width: 40,
                                     height: 40,
                                     decoration: BoxDecoration(
-                                      color: index == 0 
-                                          ? Colors.amber 
-                                          : Colors.white.withOpacity(0.3),
+                                      color: _getPositionColor(index),
                                       borderRadius: BorderRadius.circular(20),
                                     ),
                                     child: Center(
                                       child: Text(
                                         '${index + 1}',
                                         style: TextStyle(
-                                          color: index == 0 
-                                              ? Colors.black 
-                                              : Colors.white,
+                                          color: _getPositionTextColor(index),
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold,
                                         ),
@@ -315,9 +264,7 @@ class _AfterGameScreenState extends State<AfterGameScreen>
                                     child: Text(
                                       playerName,
                                       style: TextStyle(
-                                        color: index == 0 
-                                            ? Colors.amber 
-                                            : Colors.white,
+                                        color: _getTextColor(index),
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -325,15 +272,14 @@ class _AfterGameScreenState extends State<AfterGameScreen>
                                   ),
                                   // Score
                                   Text(
-                                    '$score gorgées',
+                                    '$score gorgées bues \n${(score*0.2).ceil()} à distribuer',
                                     style: TextStyle(
-                                      color: index == 0 
-                                          ? Colors.amber 
-                                          : Colors.white,
+                                      color: _getTextColor(index),
                                       fontSize: 16,
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),
+                              
                                 ],
                               ),
                             );
@@ -365,32 +311,74 @@ class _AfterGameScreenState extends State<AfterGameScreen>
                         (route) => false,
                       ),
                     ),
-                    
-                    const SizedBox(height: 20),
-                    
-                    _buildActionButton(
-                      context,
-                      'ACCUEIL',
-                      Icons.home,
-                      const Color(0xFF10B981),
-                      () => Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const AccueilScreen(),
-                        ),
-                        (route) => false,
-                      ),
-                    ),
                   ],
                 ),
               ),
               
-              const SizedBox(height: 40),
+              const SizedBox(height: 20),
             ],
           ),
         ),
       ),
     );
+  }
+
+  // Méthodes helper pour les couleurs du top 3
+  Color _getBackgroundColor(int index) {
+    switch (index) {
+      case 0: // Or
+        return Colors.amber.withOpacity(0.2);
+      case 1: // Argent
+        return Colors.grey.withOpacity(0.2);
+      case 2: // Bronze
+        return const Color(0xFFCD7F32).withOpacity(0.2); // Couleur bronze
+      default:
+        return Colors.white.withOpacity(0.1);
+    }
+  }
+
+  Color _getBorderColor(int index) {
+    switch (index) {
+      case 0: // Or
+        return Colors.amber;
+      case 1: // Argent
+        return Colors.grey;
+      case 2: // Bronze
+        return const Color(0xFFCD7F32); // Couleur bronze
+      default:
+        return Colors.white.withOpacity(0.3);
+    }
+  }
+
+  Color _getPositionColor(int index) {
+    switch (index) {
+      case 0: // Or
+        return Colors.amber;
+      case 1: // Argent
+        return Colors.grey;
+      case 2: // Bronze
+        return const Color(0xFFCD7F32); // Couleur bronze
+      default:
+        return Colors.white.withOpacity(0.3);
+    }
+  }
+
+  Color _getPositionTextColor(int index) {
+    switch (index) {
+      case 0: // Or
+        return Colors.black;
+      case 1: // Argent
+        return Colors.white;
+      case 2: // Bronze
+        return Colors.white;
+      default:
+        return Colors.white;
+    }
+  }
+
+  Color _getTextColor(int index) {
+    // Garder le texte en blanc pour tous les joueurs
+    return Colors.white;
   }
 
   Widget _buildActionButton(

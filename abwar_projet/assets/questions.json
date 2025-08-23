@@ -7,13 +7,13 @@
   },
   {
     "id": 2,
-    "question": "Celui qui roule le moins bien des clopes boit %gog (les non-fumeurs ne comptent pas)",
+    "question": "Celui qui roule le moins bien des clopes boit %gog% (les non-fumeurs ne comptent pas)",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 3,
-    "question": "%plr  Prends une feuille et un stylo, il doit dessiner quelqu'un ici et si  %plr arrive à deviner, l'artiste peut distribuer %gog gorgées, sinon il les boit",
+    "question": "%plr%  Prends une feuille et un stylo, il doit dessiner quelqu'un ici et si  %plr% arrive à deviner, l'artiste peut distribuer %gog% gorgées, sinon il les boit",
     "backgroundColor": null,
     "backgroundAsset": null
   },
@@ -25,61 +25,61 @@
   },
   {
     "id": 5,
-    "question": "A tour de rôle, chacun énonce le nom d'une bière, celui qui n'a plus d'idée boit %gog, %plr commence",
+    "question": "A tour de rôle, chacun énonce le nom d'une bière, celui qui n'a plus d'idée boit %gog%, %plr% commence",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 6,
-    "question": "Trouve un objet insolite pour décaspuler ta bière, si tu arrive pas avec cet objet tu bois %gog",
+    "question": "Trouve un objet insolite pour décaspuler ta bière, si tu arrive pas avec cet objet tu bois %gog%",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 7,
-    "question": "%plr,%plr et %plr, désignez chacun une bière, ensuite votez tous sur laquelle est la meilleure. Les majoritaires distribuez %gog gorgées chacun",
+    "question": "%plr%,%plr% et %plr%, désignez chacun une bière, ensuite votez tous sur laquelle est la meilleure. Les majoritaires distribuez %gog% gorgées chacun",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 8,
-    "question": "%plr et %plr peuvent baiser n'importe quelle personne sur Terre, du passé comme du présent, votez la meilleure réponse, le perdant boit %gog",
+    "question": "%plr% et %plr% peuvent baiser n'importe quelle personne sur Terre, du passé comme du présent, votez la meilleure réponse, le perdant boit %gog%",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 9,
-    "question": "$plr lâche sa meilleure anecdote, votez pour sa véracité, les perdants boivent %gog",
+    "question": "$plr lâche sa meilleure anecdote, votez pour sa véracité, les perdants boivent %gog%",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 10,
-    "question": "$plr n'a plus le droit de se lever de sa chaise, si ce gros tas se met debout, c'est %gog",
+    "question": "$plr n'a plus le droit de se lever de sa chaise, si ce gros tas se met debout, c'est %gog%",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 11,
-    "question": "$plr fait un lap dance a %plr, si il/elle refuse c'est %gog gorgées !",
+    "question": "$plr fait un lap dance a %plr%, si il/elle refuse c'est %gog% gorgées !",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 12,
-    "question": "Pierre-feuille-ciseaux entre %plr et %plr en une manche, celui qui perd boit %gog",
+    "question": "Pierre-feuille-ciseaux entre %plr% et %plr% en une manche, celui qui perd boit %gog%",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 13,
-    "question": "Les développeurs du jeu peuvent distribuer %gog chacuns",
+    "question": "Les développeurs du jeu peuvent distribuer %gog% chacuns",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 14,
-    "question": "Linux c'est de la merde, les connards qui y ont touchés boivent %gog",
+    "question": "Linux c'est de la merde, les connards qui y ont touchés boivent %gog%",
     "backgroundColor": null,
     "backgroundAsset": null
   },
@@ -91,37 +91,37 @@
   },
   {
     "id": 16,
-    "question": "%plr finis ton verre. Chien.",
+    "question": "%plr% finis ton verre. Chien.",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 17,
-    "question": "Si t'as déjà tenu la zigounette d'un pote pour qu'il pisse en liberté, tu distribues %gog gorgées.",
+    "question": "Si t'as déjà tenu la zigounette d'un pote pour qu'il pisse en liberté, tu distribues %gog% gorgées.",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 18,
-    "question": "Si tu as déjà bu à l'aide d'un objet de plus d'1L de capacité, tu distribues %gog gorgées espèce de Viking.",
+    "question": "Si tu as déjà bu à l'aide d'un objet de plus d'1L de capacité, tu distribues %gog% gorgées espèce de Viking.",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 19,
-    "question": "Ce qui ce sont déjà branlés aux travail boivent %gog.",
+    "question": "Ce qui ce sont déjà branlés aux travail boivent %gog%.",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 20,
-    "question": "Kiwi-roulette: la bouteille désigne la personne qui devra montrer ses kiwis. Si elle n'en a pas ou si elle refuse, elle boit %gog gorgées",
+    "question": "Kiwi-roulette: la bouteille désigne la personne qui devra montrer ses kiwis. Si elle n'en a pas ou si elle refuse, elle boit %gog% gorgées",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 21,
-    "question": "Plutôt avoir les parties génitales qui s'illuminent quand t'es excité ou devoir porter des crocs en toute circonstances ? Votez, les perdants boivent %gog gorgées",
+    "question": "Plutôt avoir les parties génitales qui s'illuminent quand t'es excité ou devoir porter des crocs en toute circonstances ? Votez, les perdants boivent %gog% gorgées",
     "backgroundColor": null,
     "backgroundAsset": null
   },
@@ -133,25 +133,25 @@
   },
   {
     "id": 23,
-    "question": "Ce qui ont déjà couché avec une personne avec 10 ans de différence ou plus boivent %gog",
+    "question": "Ce qui ont déjà couché avec une personne avec 10 ans de différence ou plus boivent %gog%",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 24,
-    "question": "Quel est l'objet le plus insolite avec lequel vous avez mangé ? Votez tous en même temps, le gagnant bois %gog",
+    "question": "Quel est l'objet le plus insolite avec lequel vous avez mangé ? Votez tous en même temps, le gagnant bois %gog%",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 25,
-    "question": "Quel joueur a tendance à se faire le plus détruire la gueule en jouant aux jeux vidéos ? Tout le monde vote et le perdant boit %gog",
+    "question": "Quel joueur a tendance à se faire le plus détruire la gueule en jouant aux jeux vidéos ? Tout le monde vote et le perdant boit %gog%",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 26,
-    "question": "Si tu aimes les NFTs tu bois %gog gorgées et tu quittes cette soirée sur le champ sale merde",
+    "question": "Si tu aimes les NFTs tu bois %gog% gorgées et tu quittes cette soirée sur le champ sale merde",
     "backgroundColor": null,
     "backgroundAsset": null
   },
@@ -163,31 +163,31 @@
   },
   {
     "id": 28,
-    "question": "Si t'as déjà stalké quelqu'un sur les réseaux sociaux, c'est un peu bizarre donc tu bois %gog gorgées. Cul sec si tu t'es déjà masturbé en faisant ça (là tu fais vraiment peur).",
+    "question": "Si t'as déjà stalké quelqu'un sur les réseaux sociaux, c'est un peu bizarre donc tu bois %gog% gorgées. Cul sec si tu t'es déjà masturbé en faisant ça (là tu fais vraiment peur).",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 29,
-    "question": "\"Les trucs que tu veux pas entendre quand t'es au lit\" %plr commence, celui qui répète ou ne trouve pas boit %gog",
+    "question": "\"Les trucs que tu veux pas entendre quand t'es au lit\" %plr% commence, celui qui répète ou ne trouve pas boit %gog%",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 30,
-    "question": "Si tu n'as jamais fait la Georgette, tu bois %gog gorgées. Faut bien que ceux qui l'ont faite se vengent.",
+    "question": "Si tu n'as jamais fait la Georgette, tu bois %gog% gorgées. Faut bien que ceux qui l'ont faite se vengent.",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 31,
-    "question": "%plr et %plr disent chacun leur nombre de partenaires idéal pendant l'acte. Le public vote, le perdant boit son nombre de prétendant(e)s imaginaires.",
+    "question": "%plr% et %plr% disent chacun leur nombre de partenaires idéal pendant l'acte. Le public vote, le perdant boit son nombre de prétendant(e)s imaginaires.",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 32,
-    "question": "Si t'as déjà revendu un cadeau qu'on t'a offert, tu bois %gog gorgées mon p'tit rat des champs.",
+    "question": "Si t'as déjà revendu un cadeau qu'on t'a offert, tu bois %gog% gorgées mon p'tit rat des champs.",
     "backgroundColor": null,
     "backgroundAsset": null
   },
@@ -199,19 +199,19 @@
   },
   {
     "id": 34,
-    "question": "%plr et %plr racontent chacun le truc le plus dégueulasse qui leur est arrivé, vote s'en suit pour le plus immonde. %gog gorgées pour le perdant ou en cas de refus.",
+    "question": "%plr% et %plr% racontent chacun le truc le plus dégueulasse qui leur est arrivé, vote s'en suit pour le plus immonde. %gog% gorgées pour le perdant ou en cas de refus.",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 35,
-    "question": "Ceux qui ont déjà raté leur 1ère année de PACES, dommage mais tu bois %gog gorgées",
+    "question": "Ceux qui ont déjà raté leur 1ère année de PACES, dommage mais tu bois %gog% gorgées",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 36,
-    "question": "Si tu vis toujours chez papa-maman, bois %gog",
+    "question": "Si tu vis toujours chez papa-maman, bois %gog%",
     "backgroundColor": null,
     "backgroundAsset": null
   },
@@ -223,43 +223,43 @@
   },
   {
     "id": 38,
-    "question": "$plr mange une cuillère à café concoctée par %plr. Si l'estomac de fer y arrive, il distribue %gog, sinon il est boit.",
+    "question": "$plr mange une cuillère à café concoctée par %plr%. Si l'estomac de fer y arrive, il distribue %gog%, sinon il est boit.",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 39,
-    "question": "$plr imite quelque chose, et $plr doit trouver dans les 20s qui suivent. %gog gorgées en jeu !",
+    "question": "$plr imite quelque chose, et $plr doit trouver dans les 20s qui suivent. %gog% gorgées en jeu !",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 40,
-    "question": "%plr et %plr prennent chacun 5 cartes. Vous devez à tour de rôle deviner la couleur d'une carte. Si c'est raté, c'est %gog gorgées !",
+    "question": "%plr% et %plr% prennent chacun 5 cartes. Vous devez à tour de rôle deviner la couleur d'une carte. Si c'est raté, c'est %gog% gorgées !",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 41,
-    "question": "Le premier qui dit \"ABWAR\" distribue %gog gorgées à la personne à sa gauche",
+    "question": "Le premier qui dit \"ABWAR\" distribue %gog% gorgées à la personne à sa gauche",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 42,
-    "question": "Le premier qui dit \"ABWAR\" boit %gog gorgées dans le verre de %plr",
+    "question": "Le premier qui dit \"ABWAR\" boit %gog% gorgées dans le verre de %plr%",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 43,
-    "question": "Celui qui a fini son verre en dernier distribue %gog gorgées",
+    "question": "Celui qui a fini son verre en dernier distribue %gog% gorgées",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 44,
-    "question": "Si tu bois l'alcool que tu as ramené tu distribues %gog gorgées, sinon tu les bois",
+    "question": "Si tu bois l'alcool que tu as ramené tu distribues %gog% gorgées, sinon tu les bois",
     "backgroundColor": null,
     "backgroundAsset": null
   },
@@ -277,43 +277,43 @@
   },
   {
     "id": 47,
-    "question": "Le premier à se coucher en soirée boit %gog gorgées, votez tous en même temps",
+    "question": "Le premier à se coucher en soirée boit %gog% gorgées, votez tous en même temps",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 48,
-    "question": "Donnez tous des noms alternatifs aux objets qui vous entourent, %plr commence, le premier qui trouve pas ou prend l'objet d'un autre boit %gog gorgées",
+    "question": "Donnez tous des noms alternatifs aux objets qui vous entourent, %plr% commence, le premier qui trouve pas ou prend l'objet d'un autre boit %gog% gorgées",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 49,
-    "question": "Les chanteurs français, le premier qui ne trouve pas boit %gog goulettes pour Francis, %plr commence",
+    "question": "Les chanteurs français, le premier qui ne trouve pas boit %gog% goulettes pour Francis, %plr% commence",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 50,
-    "question": "Thé ou café ? Les joueurs votent, les perdants vous buvez la tasse (%gog gorgées)",
+    "question": "Thé ou café ? Les joueurs votent, les perdants vous buvez la tasse (%gog% gorgées)",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 51,
-    "question": "Le premier vomi de la soirée ? Les joueurs votent, Vomito boit %gog gorgées",
+    "question": "Le premier vomi de la soirée ? Les joueurs votent, Vomito boit %gog% gorgées",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 52,
-    "question": "Bois autant de gorgées que de points sur ton permis, si tu ne l'as pas, bois %gog gorgées",
+    "question": "Bois autant de gorgées que de points sur ton permis, si tu ne l'as pas, bois %gog% gorgées",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 53,
-    "question": "%plr imite la chenille et distribue %gog gorgées sinon tu les bois",
+    "question": "%plr% imite la chenille et distribue %gog% gorgées sinon tu les bois",
     "backgroundColor": null,
     "backgroundAsset": null
   },
@@ -325,7 +325,7 @@
   },
   {
     "id": 55,
-    "question": "%plr lance une proba au joueur à sa droite, le perdant boit %gog gorgées",
+    "question": "%plr% lance une proba au joueur à sa droite, le perdant boit %gog% gorgées",
     "backgroundColor": null,
     "backgroundAsset": null
   },
@@ -337,7 +337,7 @@
   },
   {
     "id": 57,
-    "question": "%plr et %plr échangent leurs vêtements et inversent également de rôle",
+    "question": "%plr% et %plr% échangent leurs vêtements et inversent également de rôle",
     "backgroundColor": null,
     "backgroundAsset": null
   },
@@ -349,73 +349,73 @@
   },
   {
     "id": 59,
-    "question": "Si t'es réorienté tu bois %gog gorgées. Cheh !",
+    "question": "Si t'es réorienté tu bois %gog% gorgées. Cheh !",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 60,
-    "question": "%plr est le dieu de la boisson, donne l'alcool de ton choix à %plr",
+    "question": "%plr% est le dieu de la boisson, donne l'alcool de ton choix à %plr%",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 61,
-    "question": "Les gens qui font 1m83 et plus (gnéhéhé) boivent %gog gorgées",
+    "question": "Les gens qui font 1m83 et plus (gnéhéhé) boivent %gog% gorgées",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 62,
-    "question": "%plr et %plr nous lâchent leur meilleur jeu de mot avec un objet de la pièce, tout le monde vote, le gagnant distribue %gog gorgées",
+    "question": "%plr% et %plr% nous lâchent leur meilleur jeu de mot avec un objet de la pièce, tout le monde vote, le gagnant distribue %gog% gorgées",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 63,
-    "question": "Blind Test ! %plr gère la musique, le premier qui devine distribue %gog gorgées",
+    "question": "Blind Test ! %plr% gère la musique, le premier qui devine distribue %gog% gorgées",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 64,
-    "question": "Men are trash, les hommes boivent %gog gorgées",
+    "question": "Men are trash, les hommes boivent %gog% gorgées",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 65,
-    "question": "Ceux qui n'aiment pas les chips au vinaigre, c'est scandaleux, vous buvez %gog gorgées",
+    "question": "Ceux qui n'aiment pas les chips au vinaigre, c'est scandaleux, vous buvez %gog% gorgées",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 66,
-    "question": "%plr dessine ce que tu veux sur %plr, sur la partie du corps de ton choix, %gog gorgées en cas de refus",
+    "question": "%plr% dessine ce que tu veux sur %plr%, sur la partie du corps de ton choix, %gog% gorgées en cas de refus",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 67,
-    "question": "Mange tes morts, %plr bois %gog gorgées",
+    "question": "Mange tes morts, %plr% bois %gog% gorgées",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 68,
-    "question": "%plr nous fait son meilleur twerk, %gog gorgées en cas de refus",
+    "question": "%plr% nous fait son meilleur twerk, %gog% gorgées en cas de refus",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 69,
-    "question": "Si t'as un Y dans ton nom bois %gog",
+    "question": "Si t'as un Y dans ton nom bois %gog%",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 70,
-    "question": "Entre %plr et %plr, qui a le moins de chance de pécho en soirée ? Don Juan boit %gog gorgées",
+    "question": "Entre %plr% et %plr%, qui a le moins de chance de pécho en soirée ? Don Juan boit %gog% gorgées",
     "backgroundColor": null,
     "backgroundAsset": null
   },
@@ -427,37 +427,37 @@
   },
   {
     "id": 72,
-    "question": "Romi is eternal. Buvez tous %gog gorgées.",
+    "question": "Romi is eternal. Buvez tous %gog% gorgées.",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 73,
-    "question": "tou ceu ki hon daija nikaient naulwaine bouave %gog gorgaient",
+    "question": "tou ceu ki hon daija nikaient naulwaine bouave %gog% gorgaient",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 74,
-    "question": "Si t'as déjà pleuré devant un film/série (animes inclus) bois %gog gorgées gros fragile",
+    "question": "Si t'as déjà pleuré devant un film/série (animes inclus) bois %gog% gorgées gros fragile",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 75,
-    "question": "Si t'as déjà bossé, distribue %gog gorgées sinon reste au RSA sale prolo",
+    "question": "Si t'as déjà bossé, distribue %gog% gorgées sinon reste au RSA sale prolo",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 76,
-    "question": "Raconte une anecdote sur ton voisin de droite, si tu n'en a pas c'est bien dommage mais tu bois %gog gorgées, ça vous fera une petite anecdote",
+    "question": "Raconte une anecdote sur ton voisin de droite, si tu n'en a pas c'est bien dommage mais tu bois %gog% gorgées, ça vous fera une petite anecdote",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 77,
-    "question": "Ceux qui aiment les chips crème-oignons, mettez vous d'accord pour distribuer %gog gorgées",
+    "question": "Ceux qui aiment les chips crème-oignons, mettez vous d'accord pour distribuer %gog% gorgées",
     "backgroundColor": null,
     "backgroundAsset": null
   },
@@ -469,127 +469,127 @@
   },
   {
     "id": 79,
-    "question": "À tour de rôle, chacun cite le nom d'une bière, celui qui n'a plus d'idées boit %gog gorgées",
+    "question": "À tour de rôle, chacun cite le nom d'une bière, celui qui n'a plus d'idées boit %gog% gorgées",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 80,
-    "question": "Les objets utiles pour décapsuler, celui qui se trompe ou répète boit %gog gorgées",
+    "question": "Les objets utiles pour décapsuler, celui qui se trompe ou répète boit %gog% gorgées",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 81,
-    "question": "%plr, trouve un objet insolite pour décaspuler ta bière, si tu n'y arrive pas, bois %gog gorgées",
+    "question": "%plr%, trouve un objet insolite pour décaspuler ta bière, si tu n'y arrive pas, bois %gog% gorgées",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 82,
-    "question": "%plr, %plr et %plr, désignez chacun une bière, ensuite votez tous sur la quelle est la meilleure. Les majoritaires distribuez %gog gorgées chacun",
+    "question": "%plr%, %plr% et %plr%, désignez chacun une bière, ensuite votez tous sur la quelle est la meilleure. Les majoritaires distribuez %gog% gorgées chacun",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 83,
-    "question": "%plr et %plr peuvent baiser n'importe quelle personne sur Terre, du passé comme du présent, votez la meilleure réponse, le perdant boit %gog gorgées et se masturbera tout seul ce soir",
+    "question": "%plr% et %plr% peuvent baiser n'importe quelle personne sur Terre, du passé comme du présent, votez la meilleure réponse, le perdant boit %gog% gorgées et se masturbera tout seul ce soir",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 84,
-    "question": "À tour de rôle, posez une question coquine à n'importe qui. %plr commence, %gog gorgées à chaque refus",
+    "question": "À tour de rôle, posez une question coquine à n'importe qui. %plr% commence, %gog% gorgées à chaque refus",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 85,
-    "question": "%plr montre tes seins ou bois %gog gorgées, si t'es un homme tu peux en distribuer %gog",
+    "question": "%plr% montre tes seins ou bois %gog% gorgées, si t'es un homme tu peux en distribuer %gog%",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 86,
-    "question": "%plr lâche sa meilleure anecdote, votez pour sa véracité, les perdants boivent %gog gorgées",
+    "question": "%plr% lâche sa meilleure anecdote, votez pour sa véracité, les perdants boivent %gog% gorgées",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 87,
-    "question": "%plr, trouve un objet insolite pour décaspuler ta bière, si tu n'y arrive pas, bois %gog gorgées",
+    "question": "%plr%, trouve un objet insolite pour décaspuler ta bière, si tu n'y arrive pas, bois %gog% gorgées",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 88,
-    "question": "%plr galoche %plr, en  cas de refus c'est %gog gorgées",
+    "question": "%plr% galoche %plr%, en  cas de refus c'est %gog% gorgées",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 89,
-    "question": "À partir de maintenant, chaque enculé de merde de pute qui dit un gros mot doit enlever un putain de vêtement ou boire %gog putain de gorgées",
+    "question": "À partir de maintenant, chaque enculé de merde de pute qui dit un gros mot doit enlever un putain de vêtement ou boire %gog% putain de gorgées",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 90,
-    "question": "Ceux qui portent des chemises distribuent %gog par bouton enlevé. %gog gorgées en plus s'il fait tomber la chemise !",
+    "question": "Ceux qui portent des chemises distribuent %gog% par bouton enlevé. %gog% gorgées en plus s'il fait tomber la chemise !",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 91,
-    "question": "%plr choisit une scène de film, %plr et %plr doivent la rejouer, %gog gorgées en cas de refus",
+    "question": "%plr% choisit une scène de film, %plr% et %plr% doivent la rejouer, %gog% gorgées en cas de refus",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 92,
-    "question": "%plr, si coucher avec %plr ne te dérange pas, distribue %gog gorgées",
+    "question": "%plr%, si coucher avec %plr% ne te dérange pas, distribue %gog% gorgées",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 93,
-    "question": "Les façons de faire taire un bébé qui pleure, %plr commence, celui qui ne trouve pas ou se répète boit %gog gorgées",
+    "question": "Les façons de faire taire un bébé qui pleure, %plr% commence, celui qui ne trouve pas ou se répète boit %gog% gorgées",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 94,
-    "question": "%plr et %plr choisissent un super-pouvoir, vote s'en suit et le plus naze boit %gog gorgées",
+    "question": "%plr% et %plr% choisissent un super-pouvoir, vote s'en suit et le plus naze boit %gog% gorgées",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 95,
-    "question": "Plutôt devenir un furry ou un femboy, vote s'en suit, les perdants boivent %gog gorgées",
+    "question": "Plutôt devenir un furry ou un femboy, vote s'en suit, les perdants boivent %gog% gorgées",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 96,
-    "question": "Petit vote de gros, Pepsi ou Coca, les perdants boivent %gog gorgées",
+    "question": "Petit vote de gros, Pepsi ou Coca, les perdants boivent %gog% gorgées",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 97,
-    "question": "Concours de caleçons ! Les filles jugent, le roi du style boit %gog gorgées.",
+    "question": "Concours de caleçons ! Les filles jugent, le roi du style boit %gog% gorgées.",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 98,
-    "question": "Concours de culottes ! Les gars jugent, le meilleur flow boit %gog gorgées.",
+    "question": "Concours de culottes ! Les gars jugent, le meilleur flow boit %gog% gorgées.",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 99,
-    "question": "Le dernier joueur à s'être rasé les parties boit %gog gorgées devant les autres cro-magnons",
+    "question": "Le dernier joueur à s'être rasé les parties boit %gog% gorgées devant les autres cro-magnons",
     "backgroundColor": null,
     "backgroundAsset": null
   },
@@ -601,13 +601,13 @@
   },
   {
     "id": 101,
-    "question": "%plr si tu as déjà recherché des techniques de drague sur internet, bois %gog gorgées sinon distribue-les",
+    "question": "%plr% si tu as déjà recherché des techniques de drague sur internet, bois %gog% gorgées sinon distribue-les",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 102,
-    "question": "%plr a trois minutes d'immunité buccale, pour calmer son côté breton",
+    "question": "%plr% a trois minutes d'immunité buccale, pour calmer son côté breton",
     "backgroundColor": null,
     "backgroundAsset": null
   },
@@ -619,115 +619,127 @@
   },
   {
     "id": 104,
-    "question": "Vote démocratique: le plus beauf du groupe, %plr choisit. Patrick Sébastien boit %gog gorgées",
+    "question": "Vote démocratique: le plus beauf du groupe, %plr% choisit. Patrick Sébastien boit %gog% gorgées",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 105,
-    "question": "%plr, action ou vérité ? %plr choisit la punition et c'est %gog gorgées en cas de refus",
+    "question": "%plr%, action ou vérité ? %plr% choisit la punition et c'est %gog% gorgées en cas de refus",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 106,
-    "question": "Citez des références de YTP, %plr commence et le premier qui ne trouve pas il boit %gog gorgées et il va se cultiver un peu",
+    "question": "Citez des références de YTP, %plr% commence et le premier qui ne trouve pas il boit %gog% gorgées et il va se cultiver un peu",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 107,
-    "question": "Waf, waf ! Le plus gros chien du groupe boit %gog gorgées, %plr choisit le toutou",
+    "question": "Waf, waf ! Le plus gros chien du groupe boit %gog% gorgées, %plr% choisit le toutou",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 108,
-    "question": "Si tu as une appli de rencontre installée sur ton téléphone, tu bois %gog gorgées",
+    "question": "Si tu as une appli de rencontre installée sur ton téléphone, tu bois %gog% gorgées",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 109,
-    "question": "Si t'as déjà vu des gens baiser dans la vraie vie de la réalité véritable, tu bois %gog gorgées et tu lâches ton sexe petit pervers",
+    "question": "Si t'as déjà vu des gens baiser dans la vraie vie de la réalité véritable, tu bois %gog% gorgées et tu lâches ton sexe petit pervers",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 110,
-    "question": "%plr claque le cul de %plr, %gog gorgées en cas de refus",
+    "question": "%plr% claque le cul de %plr%, %gog% gorgées en cas de refus",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 111,
-    "question": "Peloton d'exécu-fion, tout le monde claque le cul de %plr à tour de rôle, %gog gorgées par cri de douleur (pas de refus possible, chien)",
+    "question": "Peloton d'exécu-fion, tout le monde claque le cul de %plr% à tour de rôle, %gog% gorgées par cri de douleur (pas de refus possible, chien)",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 112,
-    "question": "Si t'as déjà simulé, tu bois %gog gorgées. Cheh, la comedia del arte là !",
+    "question": "Si t'as déjà simulé, tu bois %gog% gorgées. Cheh, la comedia del arte là !",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 113,
-    "question": "À tour de rôle, citez une minorité non-présente dans la soirée, %gog gorgées en cas de répétition ou d'erreur",
+    "question": "À tour de rôle, citez une minorité non-présente dans la soirée, %gog% gorgées en cas de répétition ou d'erreur",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 115,
-    "question": "%plr et %plr racontent un rêve de cul bizarre, vote s'en suit et le dingus boit %gog gorgées",
+    "question": "%plr% et %plr% racontent un rêve de cul bizarre, vote s'en suit et le dingus boit %gog% gorgées",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 116,
-    "question": "Boit %gog gorgées si t'as déjà pissé sur un pote",
+    "question": "Boit %gog% gorgées si t'as déjà pissé sur un pote",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 117,
-    "question": "%plr tu reçois une carte multi-passe qui te permet de refuser une question dans la partie",
+    "question": "%plr% tu reçois une carte multi-passe qui te permet de refuser une question dans la partie",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 118,
-    "question": "Les musiques de Christophe Maé, celui qui ne trouve pas ou se répète boit %gog gorgées",
+    "question": "Les musiques de Christophe Maé, celui qui ne trouve pas ou se répète boit %gog% gorgées",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 119,
-    "question": "%plr est le sheriff, il a un pistolet ! Il a 5 gorgées qu'il peut distribuer à qui il veut, quand il veut",
+    "question": "%plr% est le sheriff, il a un pistolet ! Il a 5 gorgées qu'il peut distribuer à qui il veut, quand il veut",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 120,
-    "question": "%plr devient le barman attitré de %plr, il choisit la composition de tous ses verres",
+    "question": "%plr% devient le barman attitré de %plr%, il choisit la composition de tous ses verres",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 121,
-    "question": "%plr doit choisir un objet à moins de 10€ que %plr devra acheter sur Aliexpress, %gog gorgées en cas de refus",
+    "question": "%plr% doit choisir un objet à moins de 10€ que %plr% devra acheter sur Aliexpress, %gog% gorgées en cas de refus",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 122,
-    "question": "%plr nous fait écouter une chanson qu'il ne met jamais en soirée, %gog gorgées en cas de refus",
+    "question": "%plr% nous fait écouter une chanson qu'il ne met jamais en soirée, %gog% gorgées en cas de refus",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 123,
-    "question": "%plr et %plr disent chacun leurs plaisirs coupables, on vote le PIRE, le perdant boit %gog gorgées",
+    "question": "Les mecs, si vous vous êtes déjà fait pété sur la bite, buvez %gog% gorgées",
+    "backgroundColor": null,
+    "backgroundAsset": null
+  },
+  {
+    "id": 124,
+    "question": "%plr% et %plr% disent chacun leurs plaisirs coupables, on vote le PIRE, le perdant boit %gog% gorgées",
+    "backgroundColor": null,
+    "backgroundAsset": null
+  },
+  {
+    "id": 125,
+    "question": "%plr%, tu nous délaisses, ça fait longtemps qu'on les a pas vues ! %gog% gorgées en cas de refus",
     "backgroundColor": null,
     "backgroundAsset": null
   }

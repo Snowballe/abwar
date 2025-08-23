@@ -119,8 +119,8 @@ class _GameScreenState extends State<GameScreen> {
     String question = questions[randomQuestionIndex]['question'];
     
     // Remplacer les placeholders
-    question = question.replaceAll('%plr', widget.players[randomPlayerIndex]);
-    question = question.replaceAll('%gog', randomGulps.toString());
+    question = question.replaceAll('%plr%', widget.players[randomPlayerIndex]);
+    question = question.replaceAll('%gog%', randomGulps.toString());
     
     // Changer la couleur de fond
     Color newBackgroundColor = backgroundColors[Random().nextInt(backgroundColors.length)];
@@ -207,7 +207,7 @@ class _GameScreenState extends State<GameScreen> {
                                 icon: Icon(
                                   Icons.close,
                                   color: currentTextColor,
-                                  size: 30,
+                                  size: 10,
                                 ),
                               ),
                               
@@ -234,7 +234,7 @@ class _GameScreenState extends State<GameScreen> {
                           ),
                         ),
                         
-                        const Spacer(),
+                        //const Spacer(),
                         
                         // Question
                         Container(

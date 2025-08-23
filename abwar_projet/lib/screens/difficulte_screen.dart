@@ -60,7 +60,7 @@ class DifficulteScreen extends StatelessWidget {
                     children: [
                       // Boutons de difficulté
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        padding: const EdgeInsets.symmetric(horizontal: 5),
                         child: Column(
                           children: [
                                                          _buildDifficultyButton(
@@ -166,7 +166,7 @@ class DifficulteScreen extends StatelessWidget {
                         title,
                         style: const TextStyle(
                           color: Colors.white,
-                          fontSize: 18,
+                          fontSize: 16,
                           fontWeight: FontWeight.bold,
                           letterSpacing: 0.5,
                         ),
