@@ -112,17 +112,24 @@ class _AccueilScreenState extends State<AccueilScreen> {
                                      fontWeight: FontWeight.bold,
                                    ),
                                  ),
-                                 Container(
-                                   decoration: BoxDecoration(
-                                     color: const Color(0xFFFF6B35),
-                                     borderRadius: BorderRadius.circular(15),
-                                   ),
-                                   child: IconButton(
-                                     onPressed: _addNewTextField,
-                                     icon: const Icon(Icons.add, color: Colors.white),
-                                     tooltip: 'Ajouter un joueur',
-                                   ),
-                                 ),
+                                                                   Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(15),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.1),
+                                          blurRadius: 10,
+                                          offset: const Offset(0, 5),
+                                        ),
+                                      ],
+                                    ),
+                                    child: IconButton(
+                                      onPressed: _addNewTextField,
+                                      icon: const Icon(Icons.add, color: Color(0xFF00CC83)),
+                                      tooltip: 'Ajouter un joueur',
+                                    ),
+                                  ),
                                ],
                              ),
                              const SizedBox(height: 15),
@@ -195,35 +202,28 @@ class _AccueilScreenState extends State<AccueilScreen> {
               right: 20,
               child: Column(
                 children: [
-                  // Bouton Jouer
-                  _buildButton(
-                    context,
-                    'C\'EST TARPI !',
-                    Icons.play_arrow,
-                    const Color(0xFFFF6B35),
-                    () {
-                      List<String> validNames = _getValidNames();
-                      if (validNames.isNotEmpty) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => DifficulteScreen(players: validNames),
-                          ),
-                        );
-                      }
-                    },
-                  ),
-                  
-                  const SizedBox(height: 15),
-                  
-                  // Bouton Quitter
-                  _buildButton(
-                    context,
-                    'QUITTER',
-                    Icons.exit_to_app,
-                    const Color(0xFFEF4444),
-                    () => _showExitDialog(context),
-                  ),
+                                     // Bouton Jouer
+                   _buildButton(
+                     context,
+                     'C\'EST TARPI !',
+                     Icons.play_arrow,
+                     Colors.white,
+                     () {
+                       List<String> validNames = _getValidNames();
+                       if (validNames.isNotEmpty) {
+                         Navigator.push(
+                           context,
+                           MaterialPageRoute(
+                             builder: (context) => DifficulteScreen(players: validNames),
+                           ),
+                         );
+                       }
+                     },
+                   ),
+                   
+                   const SizedBox(height: 15),
+                   
+                               
                 ],
               ),
             ),
@@ -259,26 +259,26 @@ class _AccueilScreenState extends State<AccueilScreen> {
         child: InkWell(
           borderRadius: BorderRadius.circular(30),
           onTap: onPressed,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                icon,
-                color: Colors.white,
-                size: 28,
-              ),
-              const SizedBox(width: 15),
-              Text(
-                text,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1,
-                ),
-              ),
-            ],
-          ),
+                     child: Row(
+             mainAxisAlignment: MainAxisAlignment.center,
+             children: [
+               Icon(
+                 icon,
+                 color: const Color(0xFF00CC83),
+                 size: 28,
+               ),
+               const SizedBox(width: 15),
+               Text(
+                 text,
+                 style: const TextStyle(
+                   color: Color(0xFF00CC83),
+                   fontSize: 18,
+                   fontWeight: FontWeight.bold,
+                   letterSpacing: 1,
+                 ),
+               ),
+             ],
+           ),
         ),
       ),
     );

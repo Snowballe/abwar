@@ -28,7 +28,6 @@ class _GameScreenState extends State<GameScreen> {
   
   // Couleurs de fond
   final List<Color> backgroundColors = [
-    const Color(0xFFE9CE2C), // Jaune
     const Color(0xFFE88986), // Rose
     const Color(0xFF00CC83), // Vert
     const Color(0xFF55868C), // Bleu-gris
@@ -128,7 +127,7 @@ class _GameScreenState extends State<GameScreen> {
     setState(() {
       currentQuestion = question;
       currentBackgroundColor = newBackgroundColor;
-      currentTextColor = newBackgroundColor == const Color(0xFFE9CE2C) ? Colors.black : Colors.white;
+      currentTextColor = Colors.white;
       usedQuestionIndexes.add(randomQuestionIndex);
       usedPlayerIndexes.add(randomPlayerIndex);
       questionCount++;
@@ -197,44 +196,38 @@ class _GameScreenState extends State<GameScreen> {
                     flex: 2,
                     child: Column(
                       children: [
-                        // Header
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Row(
-                            children: [
-                              IconButton(
-                                onPressed: () => _showExitDialog(context),
-                                icon: Icon(
-                                  Icons.close,
-                                  color: currentTextColor,
-                                  size: 10,
-                                ),
-                              ),
-                              
-                              // Logo ABWAR
-                              Container(
-                                width: 60,
-                                height: 60,
-                                decoration: BoxDecoration(
-                                  color: currentTextColor.withOpacity(0.1),
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    'ABWAR',
-                                    style: TextStyle(
-                                      color: currentTextColor,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                                                 // Header
+                         Padding(
+                           padding: const EdgeInsets.all(10.0),
+                           child: Row(
+                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                             children: [
+                               // Logo ABWAR
+                               Container(
+                                 width: 100,
+                                 height: 40,
+                                 child: ClipRRect(
+                                   child: Image.asset(
+                                     'assets/images/abwar_titre.png',
+                                     width: 65,
+                                     height: 65,
+                                     fit: BoxFit.contain,
+                                   ),
+                                 ),
+                               ),
+                               // Bouton Quitter
+                               IconButton(
+                                 onPressed: () => _showExitDialog(context),
+                                 icon: Icon(
+                                   Icons.close,
+                                   color: currentTextColor,
+                                   size: 20,
+                                 ),
+                               ),
+                             ],
+                           ),
+                         ),
                         
-                        //const Spacer(),
                         
                         // Question
                         Container(
@@ -393,21 +386,24 @@ class _GameScreenState extends State<GameScreen> {
             borderRadius: BorderRadius.circular(20),
           ),
           title: const Text(
-            'Quitter la partie ?',
+            'Quitter la partie en cours ?',
             style: TextStyle(
               color: Color(0xFF1E3A8A),
               fontWeight: FontWeight.bold,
             ),
           ),
           content: const Text(
-            'Êtes-vous sûr de vouloir quitter ? Votre progression sera perdue.',
-            style: TextStyle(fontSize: 16),
+            'Tu deviens gay si tu quittes la partie en cours.\n(c\'est pas moi qui le dit c\'est écrit dans mon livre)',
+            style: TextStyle(
+              fontSize: 16,
+              color: Color(0xFF1E3A8A),
+            ),
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
               child: const Text(
-                'Continuer',
+                'Laissez-moi boire par pitié',
                 style: TextStyle(color: Color(0xFF6B7280)),
               ),
             ),
@@ -423,7 +419,7 @@ class _GameScreenState extends State<GameScreen> {
                 ),
               ),
               child: const Text(
-                'Quitter',
+                'J\'me tire !',
                 style: TextStyle(color: Colors.white),
               ),
             ),
