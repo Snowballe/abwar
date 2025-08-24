@@ -51,19 +51,11 @@ class _AccueilScreenState extends State<AccueilScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color(0xFF1E3A8A),
-              Color(0xFF3B82F6),
-              Color(0xFF60A5FA),
-            ],
-          ),
-        ),
-        child: Stack(
+             body: Container(
+         decoration: const BoxDecoration(
+           color: Color(0xFF00CC83),
+         ),
+         child: Stack(
           children: [
             // Contenu principal avec padding
             SafeArea(
@@ -71,33 +63,29 @@ class _AccueilScreenState extends State<AccueilScreen> {
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
                   children: [
-                    // Logo ABWAR
-                    Container(
-                      width: 120,
-                      height: 120,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(60),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.3),
-                            blurRadius: 20,
-                            offset: const Offset(0, 10),
-                          ),
-                        ],
-                      ),
-                      child: const Center(
-                        child: Text(
-                          'ABWAR',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xFFFF6B35),
-                            letterSpacing: 2,
+                                         // Logo ABWAR
+                     Container(
+                       width: 170,
+                       height: 170,
+                       decoration: BoxDecoration(
+                         shape: BoxShape.circle,
+                         boxShadow: [
+                           BoxShadow(
+                             color: Colors.black.withOpacity(0.2),
+                             blurRadius: 30,
+                             offset: const Offset(0, 20),
+                           ),
+                         ],
+                       ),
+                          child: ClipOval(
+                          child: Image.asset(
+                            'assets/images/logo_abwar.png',
+                            width: 120,
+                            height: 120,
+                            fit: BoxFit.contain,
                           ),
                         ),
-                      ),
-                    ),
+                     ),
                     
                     const SizedBox(height: 20),
                     
@@ -210,7 +198,7 @@ class _AccueilScreenState extends State<AccueilScreen> {
                   // Bouton Jouer
                   _buildButton(
                     context,
-                    'C\'est tarpi',
+                    'C\'EST TARPI !',
                     Icons.play_arrow,
                     const Color(0xFFFF6B35),
                     () {
