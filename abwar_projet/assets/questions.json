@@ -13,7 +13,7 @@
   },
   {
     "id": 3,
-    "question": "%plr%  Prends une feuille et un stylo, il doit dessiner quelqu'un ici et si  %plr% arrive à deviner, l'artiste peut distribuer %gog% gorgées, sinon il les boit",
+    "question": "%plr%  Prends une feuille et un stylo, il doit dessiner quelqu'un ici et si %plr% arrive à deviner, l'artiste peut distribuer %gog% gorgées, sinon il les boit",
     "backgroundColor": null,
     "backgroundAsset": null
   },
@@ -49,19 +49,19 @@
   },
   {
     "id": 9,
-    "question": "$plr lâche sa meilleure anecdote, votez pour sa véracité, les perdants boivent %gog%",
+    "question": "%plr% lâche sa meilleure anecdote, votez pour sa véracité, les perdants boivent %gog%",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 10,
-    "question": "$plr n'a plus le droit de se lever de sa chaise, si ce gros tas se met debout, c'est %gog%",
+    "question": "%plr% n'a plus le droit de se lever de sa chaise, si ce gros tas se met debout, c'est %gog%",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 11,
-    "question": "$plr fait un lap dance a %plr%, si il/elle refuse c'est %gog% gorgées !",
+    "question": "%plr% fait un lap dance a %plr%, si il/elle refuse c'est %gog% gorgées !",
     "backgroundColor": null,
     "backgroundAsset": null
   },
@@ -205,7 +205,7 @@
   },
   {
     "id": 35,
-    "question": "Ceux qui ont déjà raté leur 1ère année de PACES, dommage mais tu bois %gog% gorgées",
+    "question": "S'il y a du wum dans la salle, prenez tous une petite lichette ! Mention spéciale à Layla qui peut s'en prendre une de plus si elle veut",
     "backgroundColor": null,
     "backgroundAsset": null
   },
@@ -223,13 +223,13 @@
   },
   {
     "id": 38,
-    "question": "$plr mange une cuillère à café concoctée par %plr%. Si l'estomac de fer y arrive, il distribue %gog%, sinon il est boit.",
+    "question": "%plr% mange une cuillère à café concoctée par %plr%. Si l'estomac de fer y arrive, il distribue %gog%, sinon il est boit.",
     "backgroundColor": null,
     "backgroundAsset": null
   },
   {
     "id": 39,
-    "question": "$plr imite quelque chose, et $plr doit trouver dans les 20s qui suivent. %gog% gorgées en jeu !",
+    "question": "%plr% imite quelque chose, et %plr% doit trouver dans les 20s qui suivent. %gog% gorgées en jeu !",
     "backgroundColor": null,
     "backgroundAsset": null
   },
@@ -361,7 +361,7 @@
   },
   {
     "id": 61,
-    "question": "Les gens qui font 1m83 et plus (gnéhéhé) boivent %gog% gorgées",
+    "question": "Les gens qui font 1m83 boivent %gog% gorgées",
     "backgroundColor": null,
     "backgroundAsset": null
   },
@@ -613,7 +613,7 @@
   },
   {
     "id": 103,
-    "question": "À chaque fois qu'une fille montre ses seins, tout le monde boit",
+    "question": "À chaque fois qu'une fille montre ses seins, tout le monde boit %gog%",
     "backgroundColor": null,
     "backgroundAsset": null
   },

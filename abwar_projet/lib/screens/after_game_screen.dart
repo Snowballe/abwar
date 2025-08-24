@@ -92,15 +92,7 @@ class _AfterGameScreenState extends State<AfterGameScreen>
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color(0xFF1E3A8A),
-              Color(0xFF3B82F6),
-              Color(0xFF60A5FA),
-            ],
-          ),
+                     color: Color(0xFF00CC83),
         ),
         child: SafeArea(
           child: Column(
@@ -121,7 +113,7 @@ class _AfterGameScreenState extends State<AfterGameScreen>
                     const Expanded(
                       child: Center(
                         child: Text(
-                          'FIN DE PARTIE',
+                          'C\'EST FINI !',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 24,
@@ -145,7 +137,7 @@ class _AfterGameScreenState extends State<AfterGameScreen>
                     padding: const EdgeInsets.all(20),
                     margin: const EdgeInsets.symmetric(horizontal: 20),
                     decoration: BoxDecoration(
-                      color: Colors.amber.withOpacity(0.2),
+                      color: Colors.black.withOpacity(0.35),
                       borderRadius: BorderRadius.circular(20),
                       border: Border.all(
                         color: Colors.amber,
@@ -248,14 +240,7 @@ class _AfterGameScreenState extends State<AfterGameScreen>
                                       borderRadius: BorderRadius.circular(20),
                                     ),
                                     child: Center(
-                                      child: Text(
-                                        '${index + 1}',
-                                        style: TextStyle(
-                                          color: _getPositionTextColor(index),
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
+                                      child: _getPositionIcon(index),
                                     ),
                                   ),
                                   const SizedBox(width: 15),
@@ -373,6 +358,38 @@ class _AfterGameScreenState extends State<AfterGameScreen>
         return Colors.white;
       default:
         return Colors.white;
+    }
+  }
+
+  Widget _getPositionIcon(int index) {
+    switch (index) {
+      case 0: // 🥇 1er - Trophée
+        return const Icon(
+          Icons.emoji_events,
+          color: Colors.black,
+          size: 24,
+        );
+      case 1: // 🥈 2ème - Médaille
+        return const Icon(
+          Icons.military_tech,
+          color: Colors.white,
+          size: 24,
+        );
+      case 2: // 🥉 3ème - Bière
+        return const Icon(
+          Icons.sports_bar,
+          color: Colors.white,
+          size: 24,
+        );
+      default: // 4ème et plus - Numéro
+        return Text(
+          '${index + 1}',
+          style: TextStyle(
+            color: _getPositionTextColor(index),
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        );
     }
   }
 
