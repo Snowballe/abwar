@@ -742,5 +742,17 @@
     "question": "%plr%, tu nous délaisses, ça fait longtemps qu'on les a pas vues ! %gog% gorgées en cas de refus",
     "backgroundColor": null,
     "backgroundAsset": null
+  },
+  {
+    "id": 126,
+    "question": "Si tu peux boire ta bière en la tenant avec ton pied, distribue %gog% gorgées. Sinon, bois %gog%",
+    "backgroundColor": null,
+    "backgroundAsset": null
+  },
+  {
+    "id": 127,
+    "question": "Si tu est toujours couvert du gland bois %gog% gorgées",
+    "backgroundColor": null,
+    "backgroundAsset": null
   }
 ]
