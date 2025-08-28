@@ -249,7 +249,7 @@ class _AfterGameScreenState extends State<AfterGameScreen>
                                     child: Text(
                                       playerName,
                                       style: TextStyle(
-                                        color: _getTextColor(index),
+                                        color: Colors.white,
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -259,7 +259,7 @@ class _AfterGameScreenState extends State<AfterGameScreen>
                                   Text(
                                     '$score gorgées bues \n${(score*0.2).ceil()} à distribuer',
                                     style: TextStyle(
-                                      color: _getTextColor(index),
+                                      color: Colors.white,
                                       fontSize: 16,
                                       fontWeight: FontWeight.w500,
                                     ),
@@ -391,11 +391,6 @@ class _AfterGameScreenState extends State<AfterGameScreen>
           ),
         );
     }
-  }
-
-  Color _getTextColor(int index) {
-    // Garder le texte en blanc pour tous les joueurs
-    return Colors.white;
   }
 
   Widget _buildActionButton(
