@@ -14,7 +14,7 @@ class GameScreen extends StatefulWidget {
   State<GameScreen> createState() => _GameScreenState();
 }
 
-class _GameScreenState extends State<GameScreen> {
+class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
   String currentQuestion = "Est-ce que tout le monde est prêt ?";
   List<Map<String, dynamic>> questions = [];
   List<int> usedQuestionIndexes = [];
@@ -37,6 +37,14 @@ class _GameScreenState extends State<GameScreen> {
   Color currentBackgroundColor = Colors.black;
   Color currentTextColor = Colors.white;
   
+  // Backgrounds personnalisés
+  String? currentBackgroundImage;
+  Color? customBackgroundColor;
+  
+  // Animation de fondu
+  late AnimationController _fadeController;
+  late Animation<double> _fadeAnimation;
+  
   // Scores des joueurs
   Map<String, int> playerScores = {};
   
@@ -45,6 +53,19 @@ class _GameScreenState extends State<GameScreen> {
     super.initState();
     _initializeGame();
     _loadQuestions();
+    
+    // Initialiser l'animation de fondu
+    _fadeController = AnimationController(
+      duration: const Duration(milliseconds: 1000),
+      vsync: this,
+    );
+    _fadeAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(
+      parent: _fadeController,
+      curve: Curves.easeInOut,
+    ));
   }
   
   void _initializeGame() {
@@ -105,8 +126,10 @@ class _GameScreenState extends State<GameScreen> {
       randomQuestionIndex = Random().nextInt(questions.length);
     } while (usedQuestionIndexes.contains(randomQuestionIndex));
     
-    // Récupérer la question
+    // Récupérer la question et ses propriétés
     String question = questions[randomQuestionIndex]['question'];
+    String? backgroundColor = questions[randomQuestionIndex]['backgroundColor'];
+    String? backgroundAsset = questions[randomQuestionIndex]['backgroundAsset'];
     
     // Traitement des tags %plr% (joueurs) - logique inspirée du code Java
     List<String> questionParts = question.split('%plr%');
@@ -160,16 +183,47 @@ class _GameScreenState extends State<GameScreen> {
        processedQuestion.write(gulpParts.last);
      }
     
-    // Changer la couleur de fond
-    Color newBackgroundColor = backgroundColors[Random().nextInt(backgroundColors.length)];
+    // Gestion des backgrounds personnalisés
+    Color newBackgroundColor;
+    String? newBackgroundImage;
+    Color? newCustomBackgroundColor;
+    
+    if (backgroundColor != null && backgroundColor.isNotEmpty) {
+      // Utiliser la couleur personnalisée de la question
+      try {
+        newCustomBackgroundColor = Color(int.parse(backgroundColor.replaceAll('#', '0xFF')));
+        newBackgroundColor = Colors.black; // Fond noir pour l'animation
+      } catch (e) {
+        newBackgroundColor = backgroundColors[Random().nextInt(backgroundColors.length)];
+        newCustomBackgroundColor = null;
+      }
+    } else if (backgroundAsset != null && backgroundAsset.isNotEmpty) {
+      // Utiliser l'image de fond personnalisée
+      newBackgroundImage = backgroundAsset;
+      newBackgroundColor = Colors.black; // Fond noir pour l'animation
+      newCustomBackgroundColor = null;
+    } else {
+      // Utiliser une couleur aléatoire par défaut
+      newBackgroundColor = backgroundColors[Random().nextInt(backgroundColors.length)];
+      newBackgroundImage = null;
+      newCustomBackgroundColor = null;
+    }
     
     setState(() {
       currentQuestion = processedQuestion.toString();
       currentBackgroundColor = newBackgroundColor;
+      currentBackgroundImage = newBackgroundImage;
+      customBackgroundColor = newCustomBackgroundColor;
       currentTextColor = Colors.white;
       usedQuestionIndexes.add(randomQuestionIndex);
       questionCount++;
     });
+    
+    // Démarrer l'animation de fondu si on a un background personnalisé
+    if (newBackgroundImage != null || newCustomBackgroundColor != null) {
+      _fadeController.reset();
+      _fadeController.forward();
+    }
     
     // Réinitialiser la liste des joueurs utilisés pour la prochaine question
     if (questionCount % 3 == 0) {
@@ -216,6 +270,7 @@ class _GameScreenState extends State<GameScreen> {
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
     ]);
+    _fadeController.dispose();
     super.dispose();
   }
 
@@ -224,6 +279,7 @@ class _GameScreenState extends State<GameScreen> {
     return Scaffold(
       body: Stack(
         children: [
+          // Background principal
           Container(
             color: currentBackgroundColor,
             child: SafeArea(
@@ -381,6 +437,30 @@ class _GameScreenState extends State<GameScreen> {
               ),
             ),
           ),
+          
+          // Background personnalisé avec animation de fondu
+          if (currentBackgroundImage != null || customBackgroundColor != null)
+            AnimatedBuilder(
+              animation: _fadeAnimation,
+              builder: (context, child) {
+                return Opacity(
+                  opacity: _fadeAnimation.value,
+                  child: Container(
+                    width: double.infinity,
+                    height: double.infinity,
+                    decoration: BoxDecoration(
+                      color: customBackgroundColor,
+                      image: currentBackgroundImage != null
+                          ? DecorationImage(
+                              image: AssetImage(currentBackgroundImage!),
+                              fit: BoxFit.cover,
+                            )
+                          : null,
+                    ),
+                  ),
+                );
+              },
+            ),
           
           // Bouton NEXT sticky en bas
           Positioned(
