@@ -287,7 +287,7 @@ class _AfterGameScreenState extends State<AfterGameScreen>
                       context,
                       'REJOUER',
                       Icons.replay,
-                      const Color(0xFFFF6B35),
+                      const Color(0xFF00CC83),
                       () => Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(

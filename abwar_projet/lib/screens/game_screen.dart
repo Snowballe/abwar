@@ -17,8 +17,7 @@ class GameScreen extends StatefulWidget {
 class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
   String currentQuestion = "Est-ce que tout le monde est prêt ?";
   List<Map<String, dynamic>> questions = [];
-  List<int> usedQuestionIndexes = [];
-  List<int> usedPlayerIndexes = [];
+  List<Map<String, dynamic>> shuffledQuestions = []; // Questions mélangées et découpées
   int questionCount = 0;
   int maxQuestions = 50;
   
@@ -106,6 +105,13 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
       final List<dynamic> jsonList = json.decode(jsonString);
       setState(() {
         questions = jsonList.cast<Map<String, dynamic>>();
+        
+        // Mélanger les questions et faire une slice
+        List<Map<String, dynamic>> tempQuestions = List.from(questions);
+        tempQuestions.shuffle(Random());
+        
+        // Prendre seulement le nombre de questions nécessaires
+        shuffledQuestions = tempQuestions.take(maxQuestions).toList();
       });
     } catch (e) {
       print('Erreur lors du chargement des questions: $e');
@@ -113,57 +119,43 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
   }
   
   void _nextQuestion() {
-    if (questionCount >= maxQuestions) {
+    if (questionCount >= maxQuestions || questionCount >= shuffledQuestions.length) {
       _endGame();
       return;
     }
     
-    if (questions.isEmpty) return;
-    
-    // Sélectionner une question aléatoire non utilisée
-    int randomQuestionIndex;
-    do {
-      randomQuestionIndex = Random().nextInt(questions.length);
-    } while (usedQuestionIndexes.contains(randomQuestionIndex));
-    
-    // Récupérer la question et ses propriétés
-    String question = questions[randomQuestionIndex]['question'];
-    String? backgroundColor = questions[randomQuestionIndex]['backgroundColor'];
-    String? backgroundAsset = questions[randomQuestionIndex]['backgroundAsset'];
+    // Récupérer la question directement par index
+    Map<String, dynamic> questionData = shuffledQuestions[questionCount];
+    String question = questionData['question'];
+    String? backgroundColor = questionData['backgroundColor'];
+    String? backgroundAsset = questionData['backgroundAsset'];
     
     // Traitement des tags %plr% (joueurs) - logique inspirée du code Java
     List<String> questionParts = question.split('%plr%');
     StringBuffer processedQuestion = StringBuffer();
     
-         // Vérifier qu'on a assez de joueurs pour cette question
-     if (questionParts.length > widget.players.length + 1) {
-       // Question trop complexe, on en prend une autre
-       // Éviter la récursion infinie en prenant une question plus simple
-       if (questionCount < maxQuestions - 1) {
-         _nextQuestion();
-       }
-       return;
-     }
+    // Vérifier qu'on a assez de joueurs pour cette question
+    if (questionParts.length > widget.players.length + 1) {
+      // Question trop complexe, on en prend une autre
+      if (questionCount < maxQuestions - 1) {
+        _nextQuestion();
+      }
+      return;
+    }
     
     // Traiter chaque partie de la question avec un joueur différent
     for (int i = 0; i < questionParts.length - 1; i++) {
-      // Sélectionner un joueur aléatoire non utilisé pour cette question
-      int randomPlayerIndex;
-      do {
-        randomPlayerIndex = Random().nextInt(widget.players.length);
-      } while (usedPlayerIndexes.contains(randomPlayerIndex));
+      // Sélectionner un joueur aléatoire pour cette question
+      int randomPlayerIndex = Random().nextInt(widget.players.length);
       
       // Ajouter la partie de la question + le nom du joueur
       processedQuestion.write(questionParts[i] + widget.players[randomPlayerIndex]);
-      
-      // Marquer ce joueur comme utilisé pour cette question
-      usedPlayerIndexes.add(randomPlayerIndex);
     }
     
-         // Ajouter la dernière partie de la question (avec vérification de sécurité)
-     if (questionParts.isNotEmpty) {
-       processedQuestion.write(questionParts.last);
-     }
+    // Ajouter la dernière partie de la question (avec vérification de sécurité)
+    if (questionParts.isNotEmpty) {
+      processedQuestion.write(questionParts.last);
+    }
     
     // Traitement des tags %gog% (gorgées)
     question = processedQuestion.toString();
@@ -178,10 +170,10 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
       processedQuestion.write(gulpParts[i] + randomGulps.toString());
     }
     
-         // Ajouter la dernière partie (avec vérification de sécurité)
-     if (gulpParts.isNotEmpty) {
-       processedQuestion.write(gulpParts.last);
-     }
+    // Ajouter la dernière partie (avec vérification de sécurité)
+    if (gulpParts.isNotEmpty) {
+      processedQuestion.write(gulpParts.last);
+    }
     
     // Gestion des backgrounds personnalisés
     Color newBackgroundColor;
@@ -215,7 +207,6 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
       currentBackgroundImage = newBackgroundImage;
       customBackgroundColor = newCustomBackgroundColor;
       currentTextColor = Colors.white;
-      usedQuestionIndexes.add(randomQuestionIndex);
       questionCount++;
     });
     
@@ -223,11 +214,6 @@ class _GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
     if (newBackgroundImage != null || newCustomBackgroundColor != null) {
       _fadeController.reset();
       _fadeController.forward();
-    }
-    
-    // Réinitialiser la liste des joueurs utilisés pour la prochaine question
-    if (questionCount % 3 == 0) {
-      usedPlayerIndexes.clear();
     }
   }
   
