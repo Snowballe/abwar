@@ -343,7 +343,7 @@
   },
   {
     "id": 58,
-    "question": "Ceux qui boivent de la Jäger trinquent et boivent 1 gorgée",
+    "question": "Ceux qui boivent de la Jäger trinquent et boivent %gog% gorgées",
     "backgroundColor": null,
     "backgroundAsset": null
   },
@@ -673,7 +673,7 @@
   },
   {
     "id": 113,
-    "question": "À tour de rôle, citez une minorité non-présente dans la soirée, %gog% gorgées en cas de répétition ou d'erreur",
+    "question": "À tour de rôle, citez une minorité non-présente dans la soirée, %gog% gorgées en cas de répétition ou d'erreur, %plr% commence.",
     "backgroundColor": null,
     "backgroundAsset": null
   },
@@ -685,7 +685,7 @@
   },
   {
     "id": 116,
-    "question": "Boit %gog% gorgées si t'as déjà pissé sur un pote",
+    "question": "Bois %gog% gorgées si t'as déjà pissé sur un pote",
     "backgroundColor": null,
     "backgroundAsset": null
   },
@@ -751,8 +751,20 @@
   },
   {
     "id": 127,
-    "question": "Si tu est toujours couvert du gland bois %gog% gorgées",
+    "question": "Si tu es toujours couvert du gland bois %gog% gorgées",
     "backgroundColor": null,
     "backgroundAsset": null
-  }
+  },
+  {
+    "id": 128,
+    "question": "Si tu as déjà vomi dans une poubelle, bois %gog% gorgées. Distribues-les si c'était une poubelle Titeuf.",
+    "backgroundColor": null,
+    "backgroundAsset": null
+  },
+  {
+    "id": 129,
+    "question": "Les développeurs du jeu boivent %gog% chacuns",
+    "backgroundColor": null,
+    "backgroundAsset": null
+  },
 ]
