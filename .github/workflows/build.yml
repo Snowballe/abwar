@@ -25,6 +25,7 @@ jobs:
           name: build-apk
           path: ./Abwar-${{github.sha}}.apk
   release:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Download apk artifact
