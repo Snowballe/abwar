@@ -1,0 +1,41 @@
+name: Build and Release actions
+on:
+  push:
+    branches:
+      - 'release'
+  pull_request:
+    types: 
+      - closed
+    branches:
+      - 'release'
+jobs:
+  build:
+    runs-on: ghcr.io/cirruslabs/flutter:latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v5
+      - name: Build
+        run: |
+          cd ./abwar_projet
+          flutter build apk
+          cp ./build/app/outputs/flutter-apk/app-release.apk ./Abwar-${{github.sha}}.apk
+      - name: Upload apk artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-apk
+          path: ./Abwar-${{github.sha}}.apk
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download apk artifact
+        uses: actions/download-artifact@v5
+        with:
+          name: build-apk
+      - name: Create new Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: Abwar-${{github.sha}}
+          release_name: Abwar ${{github.sha}} Release
+          body: Demandez à <@203918472529444865>, il doit savoir
