@@ -37,6 +37,7 @@ jobs:
         with:
           name: build-apk
       - name: Create new Release
+        id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -44,3 +45,12 @@ jobs:
           tag_name: Abwar-${{github.sha}}
           release_name: Abwar ${{github.sha}} Release
           body: Demandez à <@203918472529444865>, il doit savoir
+      - name: Upload apk on release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./Abwar-${{github.sha}}.apk
+          asset_name: Abwar-${{github.sha}}.apk
+          asset_content_type: application/vnd.android.package-archive
