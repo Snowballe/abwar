@@ -21,12 +21,13 @@ jobs:
         run: |
           cd ./abwar_projet
           flutter build apk
-          cp ./build/app/outputs/flutter-apk/app-release.apk ./Abwar-${{github.sha}}.apk
+          cp ./build/app/outputs/flutter-apk/app-release.apk ../Abwar-${{github.sha}}.apk
       - name: Upload apk artifact
         uses: actions/upload-artifact@v4
         with:
           name: build-apk
           path: ./Abwar-${{github.sha}}.apk
+          if-no-files-found: error
   release:
     needs: build
     runs-on: ubuntu-latest
