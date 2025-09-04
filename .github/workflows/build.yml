@@ -10,7 +10,10 @@ on:
       - 'release'
 jobs:
   build:
-    runs-on: ghcr.io/cirruslabs/flutter:latest
+    
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/cirruslabs/flutter:latest
     steps:
       - name: Check out repository code
         uses: actions/checkout@v5
